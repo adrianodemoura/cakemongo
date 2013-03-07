@@ -1,0 +1,112 @@
+.formEditar
+{
+	padding: 10px 5px 10px 5px;
+	clear: both;
+	display: table;
+	margin: 0px auto;
+	border: 1px solid #ccc;
+	width: 80%;
+	border-radius: 8px; /* CSS 3 */
+	-o-border-radius: 8px; /* Opera */
+	-icab-border-radius: 8px; /* iCab */
+	-khtml-border-radius: 8px; /* Konqueror */
+	-moz-border-radius: 8px; /* Firefox */
+	-webkit-border-radius: 8px; /* Safari */
+}
+.barra
+{
+	width: 80%;
+	margin: 0px auto;
+}
+
+.formEditar input
+{
+	text-transform: uppercase;
+}
+
+.formEditar label
+{
+	display: block;
+	min-width: 120px;
+	line-height: 24px;
+	float: left;
+	text-align: right;
+	margin: 0px 5px 0px 0px;
+}
+
+.formEditar .editarCmp
+{
+	margin: 0px 0px 15px 0px;
+}
+
+.editarCmp
+{
+	float: left;
+}
+.formEditar .editarCmpQ
+{
+	clear: both;
+	background-color: #ccc;
+}
+.formEditar .editarCmpL
+{
+	clear: both;
+	height: 1px;
+	border-bottom: 1px solid #ccc;
+	width: 100%;
+	margin: 5px 0px 10px 0px;
+}
+.formEditar .error-message
+{
+	color: red;
+	clear: both;
+	position: absolute;
+}
+
+.imgMenuLista
+{
+	margin: 15px 10px 0px 10px;
+	cursor: pointer;
+	float: left;
+}
+.divMenuLista
+{
+	height: 100px;
+	width: 200px;
+	position: absolute;
+	margin: 2px 0px 0px 0px;
+	z-index: 1;
+	display: none;
+}
+.imgMenuLista
+{
+	float: left;
+}
+
+.divBotoes
+{
+	margin-left: 90px;
+	float: left;
+}
+.botoes
+{
+	margin-top: 10px;
+}
+
+.campos
+{
+	background-color: #fff;
+	float: left;
+}
+
+.checkbox
+{
+	float: left;
+	line-height: 20px;
+}
+
+.menuLista
+{
+	list-style: none;
+	margin: 10px 0px 0px 20px;
+}

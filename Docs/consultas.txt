@@ -1,0 +1,3 @@
+
+db.acessos.createIndex({login:1})
+db.cidades.createIndex({nome:1,uf:1})

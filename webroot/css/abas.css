@@ -1,0 +1,40 @@
+.abas
+{
+	margin: 5px 0px 2px 60px;
+}
+
+.abas ul
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+.abas li
+{
+	display: inline-block;
+	background-color: #eee;
+	padding: 10px 10px 5px 10px;
+	min-width: 80px;
+	text-align: center;
+	border-radius: 8px 8px 0 0; /* CSS 3 */
+	-o-border-radius: 8px 8px 0 0; /* Opera */
+	-icab-border-radius: 8px 8px 0 0; /* iCab */
+	-khtml-border-radius: 8px 8px 0 0; /* Konqueror */
+	-moz-border-radius: 8px 8px 0 0; /* Firefox */
+	-webkit-border-radius: 8px 8px 0 0; /* Safari */
+}
+
+.abas li a
+{
+	display: block;
+}
+
+.abas li a:hover
+{
+	color: 
+}
+
+.abas .ativa
+{
+	background-color: #B5D5FC;
+}

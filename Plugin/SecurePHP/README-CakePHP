@@ -1,0 +1,16 @@
+For CakePHP users.
+
+Set the SecurePHP library in your plugins directory.
+
+Import secure_php bootstrap in webapp/index.php, require_once must be called before Dispatcher as follow.
+<code>
+  } else {
+    //import secure_php bootstrap
+    require_once('YOUR_PLUGIN_PATH/plugins/secure_php/config/bootstrap.php');
+
+    $Dispatcher = new Dispatcher();
+    $Dispatcher->dispatch();
+  }
+</code>
+
+
