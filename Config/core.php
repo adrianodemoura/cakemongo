@@ -26,7 +26,7 @@
 	 * 
 	 * Limperando total acesso para testes de stress
 	 */
-	Configure::write('login0800',false);
+	Configure::write('login0800',true);
 
 /**
  * CakePHP Debug Level:
