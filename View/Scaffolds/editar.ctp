@@ -25,6 +25,19 @@
 
 	// campos que serão editados
 	$this->viewVars['edicaoCampos'] = isset($this->viewVars['edicaoCampos']) ? $this->viewVars['edicaoCampos'] : array();
+	if (empty($id)) // removendo criado e modificado na inclusão
+	{
+		if (in_array('Usuario.modificado',$this->viewVars['edicaoCampos']))
+		{
+			unset($this->viewVars['edicaoCampos'][array_search('Usuario.criado',$this->viewVars['edicaoCampos'])]);
+			unset($this->viewVars['edicaoCampos'][array_search('Usuario.modificado',$this->viewVars['edicaoCampos'])]);
+			$ul = count($this->viewVars['edicaoCampos']);
+			if ($this->viewVars['edicaoCampos'][$ul-1]=='-' || $this->viewVars['edicaoCampos'][$ul-1]=='#')
+			{
+				unset($this->viewVars['edicaoCampos'][$ul-1]);
+			}
+		}
+	}
 
 	// primeiro focu
 	if (isset($focus)) $this->viewVars['onRead'] .= "\t".'$("#'.$this->Form->domId($focus).'").focus();'."\n";

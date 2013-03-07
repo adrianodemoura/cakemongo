@@ -34,7 +34,7 @@ class Cidade extends AppModel {
 	public $schema = array
 	(
 		'_id' 			=> array('type' => 'integer', 'primary' => true, 'length' => 24),
-		'codigo' 			=> array
+		'codigo' 		=> array
 		(	'type' 		=> 'integer',
 			'input'		=> array('label'=>'Código','style'=>'width: 100px;'),
 			'td'		=> array('style'=>'text-align: center;')
