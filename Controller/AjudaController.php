@@ -17,9 +17,20 @@ class AjudaController extends AppController {
 	public $uses = array();
 
 	/**
+	 * Exibe a tela com informações mais detalhadas do usuário logado.
 	 * 
+	 * @return	void
 	 */
 	public function sobre_mim() 
+	{
+	}
+
+	/**
+	 * Exibe a tela de informações sobre o sistema.
+	 * 
+	 * @return	void
+	 */
+	public function sobre()
 	{
 	}
 }

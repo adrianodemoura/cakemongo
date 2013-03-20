@@ -7,7 +7,7 @@
 					<ul class='col3'>
 						<?php echo $this->Html->getLinkLI('/usuarios/listar','Acessos'); ?>
 						<?php echo $this->Html->getLinkLI('/cidades/listar','Cidades'); ?>
-						<?php echo $this->Html->getLinkLI('/perfis/listar','Usuários'); ?>
+						<?php echo $this->Html->getLinkLI('/perfis/listar','Perfis'); ?>
 						<?php echo $this->Html->getLinkLI('/urls/listar','Permissões'); ?>
 						<?php echo $this->Html->getLinkLI('/usuarios/listar','Usuários'); ?>
 						<?php echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus dados'); ?>
@@ -37,6 +37,7 @@
 		<li><a href=''>Ajuda</a>
 			<ul class='col2'>
 				<?php echo $this->Html->getLinkLI('/ajuda/sobre_mim','Sobre Mim'); ?>
+				<?php echo $this->Html->getLinkLI('/ajuda/sobre','Sobre o '.Configure::read('sistema')); ?>
 			</ul>
 		</li>
 		<?php if (!Configure::read('teste')) : ?>

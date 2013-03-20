@@ -50,12 +50,21 @@ class AppController extends Controller {
 			$this->viewVars['sexos']['M'] 	= 'Masculino';
 			$this->viewVars['sexos']['S'] 	= 'Sim';
 			$this->viewVars['sexos']['N'] 	= 'Não';
+			$this->viewVars['sexos']['1'] 	= 'Ativo';
+			$this->viewVars['sexos']['0'] 	= 'Inativo';
 
 			// menuLista Padrão
 			if ($this->getLink('/'.strtolower($this->name).'/editar'))
-				$this->viewVars['opcMenuLista']['Editar'] = $this->base.'/'.strtolower($this->name).'/editar/{_id}';
+			{
+				if (!in_array($this->action,array('editar')))
+				{
+					$this->viewVars['opcMenuLista']['Editar'] = $this->base.'/'.strtolower($this->name).'/editar/{_id}';
+				}
+			}
 			if ($this->getLink('/'.strtolower($this->name).'/excluir') && !isset($this->viewVars['soLeitura']))
+			{
 				$this->viewVars['opcMenuLista']['Excluir']= $this->base.'/'.strtolower($this->name).'/excluir/{_id}';
+			}
 
 			$this->setMenu();
 		}

@@ -188,13 +188,30 @@ class Usuario extends AppModel {
 				'message' 	=> 'Este login já foi cadastrado!',
 			),
 		),
+		'senha'	=> array
+		(
+			1	=> array
+			(
+				'rule'		=> 'notEmpty',
+				'required'	=> true,
+				'message'	=> 'A senha é obrigatória no momento da inclusão !',
+				'on'		=> 'create'
+			),
+			2	=> array
+			(
+				'rule'		=> array('minLength', '6'),
+				'msg'		=> 'A senha deve ter no mínimo 6 caracteres',
+				'on'		=> 'create'
+			),
+		)
 	);
 
 	/**
 	 * Executa código antes da operação salvar, depois da validação.\n
-	 * - Encripta a senha do usuário caso ela seja postada
+	 * - Encripta a senha do usuário caso ela seja postada.\n
 	 * - O Usuário administrador sempre DEVE estar ativo.\n
 	 * - O Usuário administrador sempre DEVE estar no Perfil Administrador.\n
+	 * - O Campo criado deve ser configurado na inclusão.\n
 	 *
 	 * @param	array	$options
 	 * @return	boolean	Verdadeiro se a operação deve continuar, false se deve abordar.
@@ -221,6 +238,11 @@ class Usuario extends AppModel {
 			$this->data['Usuario']['login'] = 'admin';
 			$this->data['Usuario']['perfil']= 'ADMINISTRADOR';
 			$this->data['Usuario']['ativo'] = true;
+		}
+		// campo criado
+		if (empty($this->data['Usuario'][$this->primaryKey]))
+		{
+			$this->data['Usuario']['criado'] = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
 		}
 		return parent::beforeSave($options);
 	}
