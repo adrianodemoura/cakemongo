@@ -162,11 +162,11 @@ class AppModel extends Model {
 							{
 								$this->data[$_mod][$_cmp] = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
 							}
-							if ($_cmp=='criado' && (empty($this->data[$_mod]['_id'])))
+							if ($_cmp=='criado' && (empty($this->data[$_mod][$this->primaryKey])))
 							{
 								$this->data[$_mod][$_cmp] = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
 							}
-							if ($_cmp=='criado' && (!empty($this->data[$_mod]['_id'])))
+							if ($_cmp=='criado' && (!empty($this->data[$_mod][$this->primaryKey])))
 							{
 								unset($this->data[$_mod][$_cmp]);
 							}
@@ -281,9 +281,9 @@ class AppModel extends Model {
    {
 		foreach($campos as $_cmp => $_vlr) 
 		{
-			$opc 	= array();
+			$opc = array();
 			$opc['conditions'][$_cmp]	= $_vlr;
-			if (!empty($this->id)) $opc['conditions']['_id <>']	= $this->id;
+			if (!empty($this->id)) $opc['conditions'][$this->primaryKey.' <>']	= $this->id;
 			$data	= $this->find('first',$opc);
 			if (!empty($data)) return false;
 		}

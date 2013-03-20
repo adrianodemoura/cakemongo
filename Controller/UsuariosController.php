@@ -86,7 +86,7 @@ class UsuariosController extends AppController {
 					unset($dataUs['0']['Usuario']['senha']);
 					debug($dataUs);
 					$acessos = isset($dataUs['0']['Usuario']['acessos']) ? $dataUs['0']['Usuario']['acessos'] : 0;
-					$novaData['Usuario']['_id'] 		= $dataUs['0']['Usuario']['_id'];
+					$novaData['Usuario'][$this->viewVars['primaryKey']] 		= $dataUs['0']['Usuario'][$this->viewVars['primaryKey']];
 					$novaData['Usuario']['perfil'] 		= $dataUs['0']['Usuario']['perfil'];
 					$novaData['Usuario']['nome'] 		= $dataUs['0']['Usuario']['nome'];
 					$novaData['Usuario']['login'] 		= $dataUs['0']['Usuario']['login'];
@@ -157,7 +157,7 @@ class UsuariosController extends AppController {
 	public function meus_dados()
 	{
 		$modelClass 	= $this->viewVars['modelClass'];
-		if (isset($this->data['Usuario']['_id']))
+		if (isset($this->data['Usuario'][$this->viewVars['primaryKey']]))
 		{
 			try
 			{
@@ -175,7 +175,7 @@ class UsuariosController extends AppController {
 				$this->redirect('listar');
 			}
 		}
-		$id				= $this->Session->read('Usuario._id');
+		$id				= $this->Session->read('Usuario.'.$this->viewVars['primaryKey']);
 		$this->data		= $this->$modelClass->read(null,$id);
 		$this->viewVars['titulo']	= 'Editando o Usuário '.$this->data['Usuario']['nome'];
 	}

@@ -203,6 +203,14 @@ class Usuario extends AppModel {
 				'msg'		=> 'A senha deve ter no mínimo 6 caracteres',
 				'on'		=> 'create'
 			),
+		),
+		'perfil'=> array
+		(
+			1	=> array
+			(
+				'rule'		=> 'notEmpty',
+				'message'	=> 'O Perfil é de preenchimento obrigatório !',
+			)
 		)
 	);
 

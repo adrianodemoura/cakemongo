@@ -1,6 +1,6 @@
 <?php 
 	// valor do campo id
-	$id = isset($this->data[$modelClass]['_id']) ? $this->data[$modelClass]['_id'] : 0;
+	$id = isset($this->data[$modelClass][$primaryKey]) ? $this->data[$modelClass][$primaryKey] : 0;
 
 	// url
 	if (!isset($url))
@@ -61,7 +61,7 @@
 <div class='campos'>
 	<form id='form<?= $modelClass ?>' method='post' action='<?= $url ?>'>
 	<?php
-	echo $this->Form->text($modelClass.'._id',array('type'=>'hidden'));
+	echo $this->Form->text($modelClass.'.'.$primaryKey,array('type'=>'hidden'));
 	foreach($this->viewVars['edicaoCampos'] as $_cmp)
 	{
 		if (strpos($_cmp,'.'))

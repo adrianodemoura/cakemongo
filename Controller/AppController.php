@@ -36,6 +36,7 @@ class AppController extends Controller {
 	{
 		$modelClass 					= $this->modelClass;
 		$this->viewVars['modelClass']	= $modelClass;
+		$this->viewVars['primaryKey']	= isset($this->$modelClass->primaryKey) ? $this->$modelClass->primaryKey : '';
 
 		// verifica sessão
 		$this->setSessao();
@@ -58,12 +59,12 @@ class AppController extends Controller {
 			{
 				if (!in_array($this->action,array('editar')))
 				{
-					$this->viewVars['opcMenuLista']['Editar'] = $this->base.'/'.strtolower($this->name).'/editar/{_id}';
+					$this->viewVars['opcMenuLista']['Editar'] = $this->base.'/'.strtolower($this->name).'/editar/{'.$this->viewVars['primaryKey'].'}';
 				}
 			}
 			if ($this->getLink('/'.strtolower($this->name).'/excluir') && !isset($this->viewVars['soLeitura']))
 			{
-				$this->viewVars['opcMenuLista']['Excluir']= $this->base.'/'.strtolower($this->name).'/excluir/{_id}';
+				$this->viewVars['opcMenuLista']['Excluir']= $this->base.'/'.strtolower($this->name).'/excluir/{'.$this->viewVars['primaryKey'].'}';
 			}
 
 			$this->setMenu();
@@ -90,7 +91,7 @@ class AppController extends Controller {
 			{
 				App::uses('Acesso','Model');
 				$A = new Acesso();
-				$da['_id']			= $id;
+				$da[$A->primaryKey]			= $id;
 				$da['data_saida'] 	= date('d-m-Y H:i:s');
 				if (!$A->saveAll($da)) die('fudeu !!!');
 			}
@@ -190,7 +191,7 @@ class AppController extends Controller {
 				$edicaoCampos = array();
 				foreach($this->$modelClass->schema as $_cmp => $_arrProp)
 				{
-					if (!in_array($_cmp,array('_id','id'))) array_push($edicaoCampos,$modelClass.'.'.$_cmp);
+					if (!in_array($_cmp,array($this->viewVars['primaryKey'],'id'))) array_push($edicaoCampos,$modelClass.'.'.$_cmp);
 				}
 				$this->viewVars['edicaoCampos'] = $edicaoCampos;
 			}
@@ -204,7 +205,7 @@ class AppController extends Controller {
 				$listaCampos = array();
 				foreach($this->$modelClass->schema as $_cmp => $_arrProp)
 				{
-					if (!in_array($_cmp,array('_id','id'))) array_push($listaCampos,$modelClass.'.'.$_cmp);
+					if (!in_array($_cmp,array($this->viewVars['primaryKey'],'id'))) array_push($listaCampos,$modelClass.'.'.$_cmp);
 				}
 				$this->viewVars['listaCampos'] = $listaCampos;
 			}
@@ -252,7 +253,7 @@ class AppController extends Controller {
 			$listaCampos = array();
 			foreach($this->$modelClass->schema as $_cmp => $_arrProp)
 			{
-				if (!in_array($_cmp,array('_id','id'))) array_push($listaCampos,$modelClass.'.'.$_cmp);
+				if (!in_array($_cmp,array($this->viewVars['primaryKey'],'id'))) array_push($listaCampos,$modelClass.'.'.$_cmp);
 			}
 			$this->viewVars['listaCampos'] = $listaCampos;
 		}
@@ -301,7 +302,7 @@ class AppController extends Controller {
 		$modelClass = $this->viewVars['modelClass'];
 
 		$opc				= array();
-		$opc['conditions'][$modelClass.'._id'] 	= $id;
+		$opc['conditions'][$modelClass.'.'.$this->viewVars['primaryKey']] 	= $id;
 		$this->data = $this->$modelClass->read(null,$id);
 		$this->viewVars['titulo']	= 'Editando '.$this->name;
 
@@ -319,7 +320,7 @@ class AppController extends Controller {
 
 		if (isset($this->viewVars['soLeitura']))
 		{
-			$id = $this->data[$modelClass]['_id'];
+			$id = $this->data[$modelClass][$this->viewVars['primaryKey']];
 			$this->Session->setFlash('Este documento só permite leitura !!!','default',array('class'=>'msgErro'));
 			$this->redirect('editar/'.$id);
 		}
