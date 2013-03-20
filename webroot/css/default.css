@@ -119,6 +119,8 @@ body
 	line-height: 30px;
 	font-size: 14px;
 	position: absolute;
+	font-weight: bold;
+	letter-spacing: 2px;
 }
 
 .msgOk

@@ -32,8 +32,7 @@ class FerramentasController extends AppController {
 	 */
 	public function limpar_cache()
 	{
-		clearCache();		// limpa o cache padrão (file)
-		Cache::clear();		// limpa o cache memcached
+		Cache::clear();
 	}
 
 	/**

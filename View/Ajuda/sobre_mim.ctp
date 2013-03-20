@@ -6,8 +6,13 @@
 		width: 200px;
 		padding-right: 5px;
 	}
+	#linkA
+	{
+		margin: 10px auto;
+		width: 600px;
+	}
 </style>
-<br /><br /><br /><br />
+<br />
 <table align='center' width='500' border='0px'>
 	<tr>
 		<td class='tdA'>Login:</td>
@@ -39,3 +44,20 @@
 	</tr>
 	
 </table>
+<div id='linkA'>
+<b>Links de Acesso: </b>
+<ul>
+<?php
+	$urls	= Cache::read('urls'.$this->Session->read('Usuario.perfil'));
+	foreach($urls as $_url => $_v) : 
+?>
+	
+	<li><a href='<?= Router::url('/',true).$_url ?>'><?= $_url ?></a></li>
+	
+<?php
+	endforeach
+?>
+
+</ul>
+
+</div>

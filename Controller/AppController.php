@@ -145,7 +145,6 @@ class AppController extends Controller {
 					!in_array($perfil,array('ADMINISTRADOR'))
 				)
 			{
-				//$this->Session->setFlash('Seu Perfil de Usuário não tem permissão para acessar este método !!!','default',array('class'=>'msgErro'));
 				$this->Session->setFlash('Seu Perfil de Usuário não tem permissão para acessar '.$minhaUrl.' !!!','default',array('class'=>'msgErro'));
 				$this->redirect(array('controller'=>'usuarios','action'=>'acesso_negado'));
 			}

@@ -53,6 +53,7 @@ class UsuariosController extends AppController {
 	 */
 	public function principal()
 	{
+		$this->viewVars['titulo'] = 'Acesso Rápido';
 	}
 
 	/**
