@@ -113,7 +113,8 @@ class AppController extends Controller {
 		if ($perfil)
 		{
 			// atualizando acessos
-			$this->setSaidaAcesso();
+			$login0800 = Configure::read('login0800');
+			if (!$login0800) $this->setSaidaAcesso();
 
 //			Cache::delete('urls'.$perfil);
 			$urls	= Cache::read('urls'.$perfil);
