@@ -5,7 +5,7 @@
 			<ul class='col2'>
 				<li><a href=''>Sistema</a>
 					<ul class='col3'>
-						<?php echo $this->Html->getLinkLI('/usuarios/listar','Acessos'); ?>
+						<?php echo $this->Html->getLinkLI('/acessos/listar','Acessos'); ?>
 						<?php echo $this->Html->getLinkLI('/cidades/listar','Cidades'); ?>
 						<?php echo $this->Html->getLinkLI('/perfis/listar','Perfis'); ?>
 						<?php echo $this->Html->getLinkLI('/urls/listar','Permissões'); ?>
