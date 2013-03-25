@@ -44,7 +44,7 @@ class RelatoriosController extends AppController {
 	public function rel002()
 	{
 		$this->data 				= $this->listaGrupo('Acesso',array('key'=>'login'));
-		$this->viewVars['titulo'] 	= 'Relatório Sintético de Acessos por usuário';
+		$this->viewVars['titulo'] 	= 'Relatório Sintético de Acessos por Usuário';
 	}
 
 	/**
@@ -55,6 +55,6 @@ class RelatoriosController extends AppController {
 	public function rel003()
 	{
 		$this->data 					= $this->listaGrupo('Usuario',array('key'=>'sexo'));
-		$this->viewVars['titulo'] 		= 'Relatório Sintético de Total de usuário por Sexo';
+		$this->viewVars['titulo'] 		= 'Relatório Sintético de Total de Usuários por Sexo';
 	}
 }

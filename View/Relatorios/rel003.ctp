@@ -15,6 +15,7 @@
 		background-color: #eee;
 	}
 </style>
+<br /><center><b><?= $titulo ?></b></center>
 <table class='tab' border='1px'>
 	<tr>
 		<th width='300px'>Sexo</th>

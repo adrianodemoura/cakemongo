@@ -52,7 +52,7 @@
 	foreach($urls as $_url => $_v) : 
 ?>
 	
-	<li><a href='<?= Router::url('/',true).$_url ?>'><?= $_url ?></a></li>
+	<li><a href='<?= Router::url('/',true).$_url ?>'><?= Router::url('/',true).substr($_url,1,strlen($_url)) ?></a></li>
 	
 <?php
 	endforeach
