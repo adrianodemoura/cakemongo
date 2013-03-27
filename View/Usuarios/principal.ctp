@@ -3,7 +3,7 @@
 	#principal
 	{
 		margin: 10px auto;
-		width: 470px;
+		width: 570px;
 		border: 1px solid #ddd;
 		padding: 10px;
 	}
