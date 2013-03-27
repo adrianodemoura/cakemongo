@@ -121,6 +121,9 @@ class Perfil extends AppModel {
 		}
 		if (count($dataN) && !$Url->saveAll($dataN)) die('fudeu na hora de atualizar Permissões !!!');
 
+		// removendo cache list
+		Cache::delete('listPerfil');
+
 		// removendo perfil de usuários
 		/*App::uses('Usuario','Model');
 		$Usuario = new Usuario();
@@ -148,6 +151,9 @@ class Perfil extends AppModel {
 		$opc['conditions']['Perfil.nome'] = 'asc';
 		$lista = $this->find('list',$opc);
 		foreach($lista as $_id => $_perfil) Cache::delete('urls'.$_perfil);
+
+		// removendo cache list
+		Cache::delete('listPerfil');
 
 		parent::afterSave($criou);
 		/*

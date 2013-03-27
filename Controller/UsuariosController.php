@@ -180,4 +180,21 @@ class UsuariosController extends AppController {
 		$this->data		= $this->$modelClass->read(null,$id);
 		$this->viewVars['titulo']	= 'Editando o Usuário '.$this->data['Usuario']['nome'];
 	}
+
+	/**
+	 * Exibe a tela de edicação de um registro do cadastro de usuários.
+	 * 
+	 * @param	integer		$id	Id do registro a ser editado
+	 * @return	void
+	 */
+	public function editar($id=0)
+	{
+		App::uses('Perfil','Model');
+		$opc 			= array();
+		$opc['fields']	= array('Perfil.nome','Perfil.nome');
+		$opc['order']['Perfil.nome'] = 'asc';
+		$Perfil = new Perfil();
+		$this->viewVars['perfis'] = $Perfil->find('list',$opc,'listPerfil');
+		parent::editar($id);
+	}
 }

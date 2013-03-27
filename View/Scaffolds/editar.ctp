@@ -91,8 +91,15 @@
 			// opções de relacionamento por busca ajax
 			if (isset($p['input']['options']) && !is_array($p['input']['options']))
 			{
-				$p['input']['type'] 	= 'text';
-				$o = $p['input']['options'];
+				if (isset($this->viewVars[$p['input']['options']]))
+				{
+					$p['input']['type']		= 'select';
+					$p['input']['options']	= $this->viewVars[$p['input']['options']];
+				} else
+				{
+					$p['input']['type'] 	= 'text';
+					$o = $p['input']['options'];
+				}
 			}
 
 			// opções de relacionamento por multiplos valores
@@ -158,4 +165,6 @@
 			}
 		}
 	}
+	/*debug($this->data);
+	debug($this->viewVars);*/
 ?>

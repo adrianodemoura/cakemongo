@@ -183,6 +183,7 @@ class AppModel extends Model {
 	 * 
 	 * @param	string	$type	Type of find operation (all / first / count / neighbors / list / threaded)
 	 * @param	array	$query	Option fields (conditions / fields / joins / limit / offset / order / page / group / callbacks)
+	 * @param	string	$cache	Nome do cache
 	 * @return	array	Array of records, or Null on failure.
 	 * @link http://book.cakephp.org/2.0/en/models/deleting-data.html#deleteall
 	 */
