@@ -24,7 +24,7 @@
 	/**
 	 * Acesso sem login ?
 	 * 
-	 * Limperando total acesso para testes de stress
+	 * Limberando acesso total para testes de stress
 	 */
 	Configure::write('login0800',true);
 
