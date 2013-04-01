@@ -8,7 +8,7 @@ class DATABASE_CONFIG {
 	 * 
 	 * @var		array
 	 */
-	public $default = array
+	public $cakemongo = array
 	(
 			'datasource' 	=> 'Mongodb.MongodbSource',
 			'host' 			=> 'localhost',
@@ -24,5 +24,20 @@ class DATABASE_CONFIG {
 			                      'options' => array('replicaSet' => 'myRepl')
 					     ),
 			*/
+	);
+
+	/**
+	 * Banco de Dados Padrão
+	 * 
+	 * @var		array
+	 */
+	public $default 	= array(
+		'datasource' 	=> 'Database/Mysql',
+		'persistent' 	=> false,
+		'host' 			=> 'localhost',
+		'login' 		=> 'cakemongo_us',
+		'password' 		=> 'cakemongo_67',
+		'database' 		=> 'cakemongo_bd',
+		'encoding' 		=> 'utf8'
 	);
 }
