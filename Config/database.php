@@ -8,7 +8,7 @@ class DATABASE_CONFIG {
 	 * 
 	 * @var		array
 	 */
-	public $cakemongo = array
+	public $default = array
 	(
 			'datasource' 	=> 'Mongodb.MongodbSource',
 			'host' 			=> 'localhost',
@@ -31,7 +31,7 @@ class DATABASE_CONFIG {
 	 * 
 	 * @var		array
 	 */
-	public $default 	= array(
+	public $default2 	= array(
 		'datasource' 	=> 'Database/Mysql',
 		'persistent' 	=> false,
 		'host' 			=> 'localhost',
