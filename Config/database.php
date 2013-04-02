@@ -10,20 +10,20 @@ class DATABASE_CONFIG {
 	 */
 	public $default = array
 	(
-			'datasource' 	=> 'Mongodb.MongodbSource',
-			'host' 			=> 'localhost',
-			'database' 		=> 'mongo_bd',
-			'login' 		=> 'mongo_us',	
-			'password' 		=> 'mongo_67',
-			'port' 			=> 27017,
-			'prefix' 		=> '',
-			'persistent' 	=> 'true',
-			/*
-			// opcional
-			'replicaset' 	=> array('host' => 'mongodb://servidor:usuario@localhost:27021,localhost:27022/controller', 
-			                      'options' => array('replicaSet' => 'myRepl')
-					     ),
-			*/
+		'datasource' 	=> 'Mongodb.MongodbSource',
+		'host' 			=> 'localhost',
+		'database' 		=> 'mongo_bd',
+		'login' 		=> 'mongo_us',	
+		'password' 		=> 'mongo_67',
+		'port' 			=> 27017,
+		'prefix' 		=> '',
+		'persistent' 	=> 'true',
+		/* 
+		// opcional
+		'replicaset' 	=> array('host' => 'mongodb://servidor:usuario@localhost:27021,localhost:27022/controller', 
+							  'options' => array('replicaSet' => 'myRepl')
+					 ),
+		*/
 	);
 
 	/**
@@ -31,7 +31,8 @@ class DATABASE_CONFIG {
 	 * 
 	 * @var		array
 	 */
-	public $default2 	= array(
+	public $default2 	= array
+	(
 		'datasource' 	=> 'Database/Mysql',
 		'persistent' 	=> false,
 		'host' 			=> 'localhost',
