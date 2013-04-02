@@ -432,7 +432,7 @@ class AppController extends Controller {
 		if (!empty($this->request->params['plugin'])) $url .= $this->request->params['plugin'].'/';
 
 		$opc = array();
-		$opc['conditions'][$modelClass.'.'.$campo] = "^$texto"; 
+		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*");
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';
 		$opc['limit'] = 100;
 		$pesquisa = $this->$modelClass->find('list',$opc);
