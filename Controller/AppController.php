@@ -415,4 +415,27 @@ class AppController extends Controller {
 		arsort($data);
 		return $data;
 	}
+
+	/**
+	 * Executa uma pesquisa no banco de dados
+	 * 
+	 * @param	string	$campo	Campo a ser pesquisado.
+	 * @param	string	$texto	Texto a ser pesquisado.
+	 * @return	void
+	 */
+	public function pesquisar($campo='',$texto='')
+	{
+		$this->viewPath = 'Scaffolds';
+		$this->layout 	= 'ajax';
+		$url 			= Router::url('/',true).strtolower($this->name).'/editar';
+		$modelClass		= $this->viewVars['modelClass'];
+		if (!empty($this->request->params['plugin'])) $url .= $this->request->params['plugin'].'/';
+
+		$opc = array();
+		$opc['conditions'][$modelClass.'.'.$campo] = "^$texto"; 
+		$opc['order'][$modelClass.'.'.$campo] = 'asc';
+		$opc['limit'] = 100;
+		$pesquisa = $this->$modelClass->find('list',$opc);
+		$this->set(compact('url','pesquisa'));
+	}
 }

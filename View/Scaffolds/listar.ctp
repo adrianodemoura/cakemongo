@@ -26,6 +26,8 @@
 
 <?php echo $this->element('abas'); ?>
 
+<?php echo $this->element('pesquisa'); ?>
+
 <table cellspacing='0' cellpadding='0' class='tabLista'>
 <?php foreach($this->data as $_l => $_arrMods) : $id = $_arrMods[$modelClass]['_id']; ?>
 	<!-- cabeçalho -->

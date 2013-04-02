@@ -55,6 +55,7 @@ class Usuario extends AppModel {
 		),
 		'nome' 			=> array
 		(	'type' 		=> 'string',
+			'index'		=> true,
 			'length'	=> 80,
 			'null'		=> false,
 			'input'		=> array('label'=>'Nome','style'=>'width: 300px;')
@@ -67,6 +68,7 @@ class Usuario extends AppModel {
 		),
 		'endereco'		=> array
 		(	'type' 		=> 'string',
+			'index'		=> true,
 			'length'	=> 80,
 			'input'		=> array('label'=>'Endereço','style'=>'width: 300px;')
 		),
