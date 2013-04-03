@@ -12,8 +12,8 @@
 		<li> << </li>
 		<li> < </li>
 		<?php else : ?>
-		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:1'> << </a></li>
-		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:<?= $pag-1 ?>'> < </a></li>
+		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:1/ordem:<?= $this->request->named['sort'] ?>/direcao:<?= $this->request->named['direction'] ?>'> << </a></li>
+		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:<?= $pag-1 ?>/ordem:<?= $this->request->named['sort'] ?>/direcao:<?= $this->request->named['direction'] ?>'> < </a></li>
 		<?php endif ?>
 		
 		<?php 
@@ -30,7 +30,8 @@
 
 				$this->viewVars['onRead'] .= "\t".'$("#ListaPag").change(function() {
 					var p = $(this).val();
-					var url = "'.Router::url('/',true).strtolower($this->name).'/listar/pag:"+p; 
+					var url = "'.Router::url('/',true).strtolower($this->name).'/listar/pag:"+p+"/ordem:'.
+					$this->request->named['sort'].'/direcao:'.$this->request->named['direction'].'";
 					window.location.href=url; 
 				})'."\n";
 			}
@@ -40,8 +41,8 @@
 		<li> > </li>
 		<li> >> </li>
 		<?php else : ?>
-		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:<?= $pag+1 ?>'> > </a></li>
-		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:<?= $this->request->params['paging'][$modelClass]['pageCount'] ?>'> >> </a></li>
+		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:<?= $pag+1 ?>/ordem:<?= $this->request->named['sort'] ?>/direcao:<?= $this->request->named['direction'] ?>'> > </a></li>
+		<li><a href='<?= Router::url('/',true).strtolower($this->name) ?>/listar/pag:<?= $this->request->params['paging'][$modelClass]['pageCount'] ?>/ordem:<?= $this->request->named['sort'] ?>/direcao:<?= $this->request->named['direction'] ?>'> >> </a></li>
 		<?php endif ?>
 		
 	</ul>

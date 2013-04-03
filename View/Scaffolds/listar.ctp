@@ -13,6 +13,11 @@
 	// lista campos
 	$this->viewVars['listaCampos'] = isset($this->viewVars['listaCampos']) ? $this->viewVars['listaCampos'] : array();
 
+	// 
+	$urlPag = Router::url('/',true).strtolower($this->name).'/listar/pag:'.$this->request->params['paging'][$modelClass]['page'];
+
+	//
+	if ($this->request->named['direction']=='asc') $direcao = 'desc'; else $direcao = 'asc';
 ?>
 
 <?php if (!isset($soLeitura) && $this->Html->getLink('/'.strtolower($this->name).'/salvar')) : ?>
@@ -43,7 +48,13 @@
 		$p = isset($schema[$a['1']]) ? $schema[$a['1']] : array(); ?>
 		<?php $tit = isset($p['input']['label']) ? $p['input']['label'] : $a['1']; ?>
 		<th id='th<?= ucfirst($a['1']) ?>' <?php if (isset($p['th'])) foreach($p['th'] as $_tag => $_vlr) echo $_tag.'="'.$_vlr.'"';  ?> >
-		<?= $tit ?>
+		
+		<?php if (isset($p['index'])) : ?>
+			<a href='<?= $urlPag ?>/ordem:<?= strtolower($a['1']) ?>/dire:<?= $direcao ?>'><?= $tit ?></a>
+		<?php else : ?>
+			<?= $tit ?>
+		<?php endif ?>
+
 		</th>
 	<?php endforeach ?>
 	</tr>

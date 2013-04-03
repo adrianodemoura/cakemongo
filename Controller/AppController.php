@@ -239,13 +239,19 @@ class AppController extends Controller {
 		// direção, pagina e ordem
 		$pag['direction'] 		= isset($this->passedArgs['dire']) 		? $this->passedArgs['dire'] 	: 'asc';
 		$pag['page']			= isset($this->passedArgs['pag']) 		? $this->passedArgs['pag'] 		: 1;
-		$pag['sort']			= isset($this->passedArgs['ordem']) 	? $this->passedArgs['ordem'] 	: 'nome';
-		if (!isset($this->passedArgs['pag']))
+		$pag['sort']			= isset($this->passedArgs['ordem']) 	? $this->passedArgs['ordem'] 	: $this->$modelClass->displayField;
+		if (	!isset($this->passedArgs['pag']) ||
+				!isset($this->passedArgs['ordem'])
+			)
 		{
-			$pag = $this->Session->check('listar.'.$chave.'.pag') ? $this->Session->read('listar.'.$chave.'.pag') : 1;
-			$this->redirect('listar/pag:'.$pag);
+			$pag = $this->Session->check('listar.'.$chave.'.pag') 	? $this->Session->read('listar.'.$chave.'.pag') 	: 1;
+			$ord = $this->Session->check('listar.'.$chave.'.ordem') ? $this->Session->read('listar.'.$chave.'.ordem') 	: $this->$modelClass->displayField;
+			$dire= $this->Session->check('listar.'.$chave.'.dire') 	? $this->Session->read('listar.'.$chave.'.dire') 	: 'asc';
+			$this->redirect('listar/pag:'.$pag.'/ordem:'.$ord.'/dire:'.$dire);
 		}
 		$this->Session->write('listar.'.$chave.'.pag',$pag['page']);
+		$this->Session->write('listar.'.$chave.'.ordem',$pag['sort']);
+		$this->Session->write('listar.'.$chave.'.dire',$pag['direction']);
 
 		// filtro
 		$filtro 				= isset($this->filtro) ? $this->filtro : array();
@@ -347,7 +353,7 @@ class AppController extends Controller {
 			if ($this->$modelClass->saveAll($this->data))
 			{
 				$this->Session->setFlash('O Registro foi salvo com sucesso !!!','default',array('class'=>'msgOk'));
-				$this->redirect('editar/'.$this->$modelClass->id);
+				//$this->redirect('editar/'.$this->$modelClass->id);
 			}
 		} catch (MongoException $e) 
 		{

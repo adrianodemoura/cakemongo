@@ -36,6 +36,8 @@ class Cidade extends AppModel {
 		'_id' 			=> array('type' => 'integer', 'primary' => true, 'length' => 24),
 		'codigo' 		=> array
 		(	'type' 		=> 'integer',
+			'index'		=> true,
+			'length'	=> 11,
 			'input'		=> array('label'=>'Código','style'=>'width: 100px;'),
 			'td'		=> array('style'=>'text-align: center;')
 		),
