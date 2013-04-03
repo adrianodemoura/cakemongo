@@ -36,6 +36,7 @@ class Perfil extends AppModel {
 		'_id' 			=> array('type' => 'integer', 'primary' => true, 'length' => 40),
 		'nome' 			=> array
 		(	'type' 		=> 'string',
+			'index'		=> true,
 			'length'	=> 20,
 			'input'		=> array('label'=>'Nome','style'=>'width: 300px;')
 		)

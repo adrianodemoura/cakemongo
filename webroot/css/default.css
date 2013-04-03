@@ -193,3 +193,38 @@ body
 	border: 1px solid #ccc;
 	display: none;
 }
+
+#pesquisa
+{
+	float: right;
+	right: 10px;
+	position: absolute;
+}
+
+#pesquisa #slPesquisa
+{
+	width: 100px;
+	font-size: 12px;
+}
+#pesquisa #edPesquisa
+{
+	background-color: #fff;
+	width: 140px;
+}
+#pesquisa #rePesquisa
+{
+	display: none;
+	float: left;
+	border: none;
+	position: absolute;
+	background-color: #E1EBF7;
+	padding: 0PX 3px 0px 3px;
+	font-size: 10px;
+	cursor: pointer;
+}
+#pesquisa #rePesquisa ul
+{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}

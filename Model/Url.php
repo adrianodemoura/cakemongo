@@ -46,6 +46,7 @@ class Url extends AppModel {
 		'_id' 			=> array('type' => 'integer', 'primary' => true, 'length' => 40),
 		'link' 			=> array
 		(	'type' 		=> 'string',
+			'index'		=> true,
 			'length'	=> 60,
 			'null'		=> false,
 			'th'		=> array('style'=>'width: 300px;'),

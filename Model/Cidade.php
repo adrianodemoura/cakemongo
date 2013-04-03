@@ -41,6 +41,7 @@ class Cidade extends AppModel {
 		),
 		'nome' 			=> array
 		(	'type' 		=> 'string',
+			'index'		=> true,
 			'length'	=> 80,
 			'input'		=> array('label'=>'Nome','style'=>'width: 300px;')
 		),

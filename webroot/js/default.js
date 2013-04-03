@@ -51,5 +51,41 @@
 			}
 		}
 	}
-	
+
+	/**
+	 * Atualiza o comboPesquisa com a resposta ajax
+	 * resposta:
+	 * item1,valor1;
+	 * item2,valor2;
+	 * item3,valor3;
+	 */
+	function setPesquisa(url,code)
+	{
+		var jId		= "#rePesquisa";
+		var texto 	= $("#edPesquisa").val();
+		var tam		= texto.length;
+		var jUrl	= url+$("#slPesquisa").val()+'/'+encodeURIComponent(texto);
+
+		if (code==27 || !texto)
+		{
+			$(jId).fadeOut("4000");
+		} else
+		{
+			if(tam>2)
+			{
+				$(jId).load(jUrl, function(resposta, status, xhr)
+				{
+					if (status=='success')
+					{
+						$(jId).fadeIn();
+						$(jId).html(resposta);
+					}
+				});
+			} else
+			{
+				$(jId).fadeIn();
+				$(jId).html('digite no mínimo 3 caracteres !!!');
+			}
+		}
+	}
 	

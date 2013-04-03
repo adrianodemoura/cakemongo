@@ -355,8 +355,13 @@ class AppController extends Controller {
 		$login0800 = Configure::read('login0800');
 		if ($login0800)
 		{
-			$data['Usuario']['login'] = 'admin';
-			$data['Usuario']['perfil'] = 'ADMINISTRADOR';
+			$data['Usuario']['id'] 			= 1;
+			$data['Usuario']['login'] 		= 'admin';
+			$data['Usuario']['perfil'] 		= 'ADMINISTRADOR';
+			$data['Usuario']['nome'] 		= 'Administrador 0800';
+			$data['Usuario']['ultimo_ip'] 	= getenv('REMOTE_ADDR');
+			$data['Usuario']['ultimo'] 		= date('d/m/Y H:i');
+			$data['Usuario']['acessos'] 	= 1;
 			$this->Session->write('Usuario',$data['Usuario']);
 		}
 
