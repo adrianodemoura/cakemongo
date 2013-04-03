@@ -436,6 +436,8 @@ class AppController extends Controller {
 		$modelClass		= $this->viewVars['modelClass'];
 		if (!empty($this->request->params['plugin'])) $url .= $this->request->params['plugin'].'/';
 
+		$texto = mb_strtoupper($texto,'UTF-8');
+
 		$opc = array();
 		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*");
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';

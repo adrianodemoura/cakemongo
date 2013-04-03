@@ -37,7 +37,7 @@ class UsuariosController extends AppController {
 		
 		if ($this->action=='listar')
 		{
-			$this->viewVars['listaCampos']	= array('Usuario.nome',
+			$this->viewVars['listaCampos']	= array('Usuario.login','Usuario.nome',
 			'Usuario.telResidencial','Usuario.celular',
 			'Usuario.aniversario','Usuario.perfil',
 			'Usuario.modificado','Usuario.criado');
