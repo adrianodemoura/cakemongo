@@ -202,7 +202,7 @@ class Usuario extends AppModel {
 			2	=> array
 			(
 				'rule'		=> array('minLength', '6'),
-				'msg'		=> 'A senha deve ter no mínimo 6 caracteres',
+				'message'	=> 'A senha deve ter no mínimo 6 caracteres',
 				'on'		=> 'create'
 			),
 		),
