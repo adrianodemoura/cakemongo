@@ -482,6 +482,14 @@ class MongodbSource extends DboSource {
 			$this->_convertId($data['_id']);
 		}
 
+		// convertendo números
+		foreach($data as $_cmp => $_vlr)
+		{
+			$tipo = isset($Model->schema[$_cmp]['type']) ? $Model->schema[$_cmp]['type'] : 'string';
+			if ($tipo=='integer') 	$data[$_cmp] = (int) $_vlr;
+			if ($tipo=='float') 	$data[$_cmp] = (float) $_vlr;
+		}
+
 		$this->_prepareLogQuery($Model); // just sets a timer
 		try{
 			$return = $this->_db
