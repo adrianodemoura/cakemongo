@@ -26,6 +26,8 @@
 
 <?php echo $this->element('abas'); ?>
 
+<?php echo $this->element('paginacao_lista'); ?>
+
 <?php echo $this->element('pesquisa'); ?>
 
 <table cellspacing='0' cellpadding='0' class='tabLista'>

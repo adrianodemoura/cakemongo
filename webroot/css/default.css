@@ -229,3 +229,59 @@ body
 	padding: 0px;
 	list-style: none;
 }
+
+#paginacao_lista
+{
+	float: left;
+	margin: 5px 0px 0px 10px;
+	/*background-color: #ddd;*/
+	min-width: 200px;
+	height: 28px;
+}
+
+#paginacao_lista ul
+{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+#paginacao_lista ul li
+{
+	display: inline-block;
+	background-color: #eee;
+	width: 40px;
+	text-align: center;
+	line-height: 28px;
+	color: #ddd;
+	border-radius: 8px; /* CSS 3 */
+	-o-border-radius: 8px; /* Opera */
+	-icab-border-radius: 8px; /* iCab */
+	-khtml-border-radius: 8px; /* Konqueror */
+	-moz-border-radius: 8px; /* Firefox */
+	-webkit-border-radius: 8px; /* Safari */
+}
+
+#paginacao_lista ul li a
+{
+	display: block;
+}
+
+#paginacao_lista ul li a:hover
+{
+	background-color: #B5D5FC;
+	border-radius: 8px; /* CSS 3 */
+	-o-border-radius: 8px; /* Opera */
+	-icab-border-radius: 8px; /* iCab */
+	-khtml-border-radius: 8px; /* Konqueror */
+	-moz-border-radius: 8px; /* Firefox */
+	-webkit-border-radius: 8px; /* Safari */
+}
+
+#paginacao_lista select
+{
+	width: 50px;
+	text-align: center;
+	border: 0px;
+	height: 28px;
+}

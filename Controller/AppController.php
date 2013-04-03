@@ -226,7 +226,8 @@ class AppController extends Controller {
 	}
 
 	/**
-	 * Exibe a tela de paginação do cadastro de alunos
+	 * Exibe a tela de paginação do documento atual
+	 * - A página deve estar na sessão.\n
 	 * 
 	 * @return	void
 	 */
@@ -235,19 +236,31 @@ class AppController extends Controller {
 		$chave					= $this->plugin.'.'.$this->name;
 		$modelClass 			= $this->viewVars['modelClass'];
 
-		// direção
+		// direção, pagina e ordem
 		$pag['direction'] 		= isset($this->passedArgs['dire']) 		? $this->passedArgs['dire'] 	: 'asc';
 		$pag['page']			= isset($this->passedArgs['pag']) 		? $this->passedArgs['pag'] 		: 1;
 		$pag['sort']			= isset($this->passedArgs['ordem']) 	? $this->passedArgs['ordem'] 	: 'nome';
+		if (!isset($this->passedArgs['pag']))
+		{
+			$pag = $this->Session->check('listar.'.$chave.'.pag') ? $this->Session->read('listar.'.$chave.'.pag') : 1;
+			$this->redirect('listar/pag:'.$pag);
+		}
+		$this->Session->write('listar.'.$chave.'.pag',$pag['page']);
 
+		// filtro
 		$filtro 				= isset($this->filtro) ? $this->filtro : array();
 
+		// configurando a paginação
 		$this->params['named'] 	= $pag;
 		$this->data				= $this->paginate(null,$filtro);
 
+		// título padrão
 		$this->viewVars['titulo']	= 'Listando '.$this->name;
+
+		// view padrão
 		if ($this->usarScaffolds) $this->viewPath = 'Scaffolds';
-		
+
+		// configurando os campos que serão exibidos
 		if (!isset($this->viewVars['listaCampos']))
 		{
 			$listaCampos = array();
