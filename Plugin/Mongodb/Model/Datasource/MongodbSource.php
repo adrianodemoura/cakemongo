@@ -800,6 +800,17 @@ class MongodbSource extends DboSource {
 			}
 		}
 
+		// convertendo números
+		foreach($data as $_tag => $_arrCmps)
+		{
+			foreach($_arrCmps as $_cmp => $_vlr)
+			{
+				$tipo = isset($Model->schema[$_cmp]['type']) ? $Model->schema[$_cmp]['type'] : 'string';
+				if ($tipo=='integer') 	$data[$_tag][$_cmp] = (int) $_vlr;
+				if ($tipo=='float') 	$data[$_tag][$_cmp] = (float) $_vlr;
+			}
+		}
+
 		return $data;
 	}
 

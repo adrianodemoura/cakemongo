@@ -21,7 +21,7 @@ class CidadesController extends AppController {
 	 */
 	public function beforeFilter()
 	{
-		//$this->viewVars['soLeitura'] = true;
+		$this->viewVars['soLeitura'] = true;
 		parent::beforeFilter();
 	}
 

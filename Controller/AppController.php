@@ -353,7 +353,7 @@ class AppController extends Controller {
 			if ($this->$modelClass->saveAll($this->data))
 			{
 				$this->Session->setFlash('O Registro foi salvo com sucesso !!!','default',array('class'=>'msgOk'));
-				//$this->redirect('editar/'.$this->$modelClass->id);
+				$this->redirect('editar/'.$this->$modelClass->id);
 			}
 		} catch (MongoException $e) 
 		{
