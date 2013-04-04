@@ -18,7 +18,7 @@
 		<ul class='col2'>
 		<?php foreach($_arrUrl as $_tit => $_url) : ?>
 			<li>
-				<a href='<?= str_replace('{_id}',$id,$_url) ?>'<?php if ($_tit=='Excluir') echo " onclick=return confirm('Você tem certeza em excluir este registro ?') "; ?> >
+				<a href='<?= str_replace('{_id}',$id,$_url) ?>'<?php if ($_tit=='Excluir') echo " onclick=\"return confirm('Você tem certeza em excluir este registro ?')\""; ?> >
 					<?= $_tit ?>
 				</a>
 			</li>
