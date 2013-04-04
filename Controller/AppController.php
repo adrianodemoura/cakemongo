@@ -429,20 +429,22 @@ class AppController extends Controller {
 	 */
 	public function busca_ajax($texto='')
 	{
+		$texto 			= mb_strtoupper($texto,'UTF-8');
 		$modelClass 	= $this->modelClass;
 		$campo			= isset($this->$modelClass->displayField) ? $this->$modelClass->displayField : 'nome';
 		$this->layout	= 'ajax';
-		if ($this->usarScaffolds) $this->viewPath = 'Scaffolds';
+		$tipo			= $this->$modelClass->schema[$campo]['type'] ? $this->$modelClass->schema[$campo]['type'] : '';
 
-		$texto = mb_strtoupper($texto,'UTF-8');
-
-		$opc	= array();
+		$opc			= array();
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';
-		$opc['fields'] = array($modelClass.'.'.$campo,$modelClass.'.'.$campo);
-		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
-		
-		$opc['limit'] = 10000;
-		$this->data = $this->$modelClass->find('list',$opc);
+		$opc['fields'] 	= array($modelClass.'.'.$campo,$modelClass.'.'.$campo);
+		if (!in_array($tipo,array('integer','float')))
+			$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
+		else
+			$opc['conditions'][$modelClass.'.'.$campo] = (float) $texto;
+		$opc['limit'] 	= 10000;
+		$this->data 	= $this->$modelClass->find('list',$opc);
+		if ($this->usarScaffolds) $this->viewPath = 'Scaffolds';
 	}
 
 	/**
@@ -454,19 +456,24 @@ class AppController extends Controller {
 	 */
 	public function pesquisar($campo='',$texto='')
 	{
+		$texto 			= mb_strtoupper($texto,'UTF-8');
 		$this->viewPath = 'Scaffolds';
 		$this->layout 	= 'ajax';
 		$url 			= Router::url('/',true).strtolower($this->name).'/editar';
 		$modelClass		= $this->viewVars['modelClass'];
+		$tipo			= $this->$modelClass->schema[$campo]['type'] ? $this->$modelClass->schema[$campo]['type'] : '';
+
 		if (!empty($this->request->params['plugin'])) $url .= $this->request->params['plugin'].'/';
 
-		$texto = mb_strtoupper($texto,'UTF-8');
-
-		$opc = array();
-		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
+		$opc 			= array();
+		if (!in_array($tipo,array('integer','float')))
+			$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
+		else
+			$opc['conditions'][$modelClass.'.'.$campo] = (float) $texto;
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';
-		$opc['limit'] = 100;
-		$pesquisa = $this->$modelClass->find('list',$opc);
+		$opc['limit'] 	= 100;
+
+		$pesquisa 		= $this->$modelClass->find('list',$opc);
 		$this->set(compact('url','pesquisa'));
 	}
 }
