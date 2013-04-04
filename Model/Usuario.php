@@ -49,6 +49,7 @@ class Usuario extends AppModel {
 		),
 		'login' 		=> array
 		(	'type' 		=> 'string',
+			'index'		=> true,
 			'length'	=> 15,
 			'null'		=> false,
 			'input'		=> array('label'=>'Login','style'=>'width: 120px; text-transform: lowercase; text-align: center;')

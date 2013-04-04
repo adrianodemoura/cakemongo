@@ -400,26 +400,6 @@ class AppController extends Controller {
 	}
 
 	/**
-	 * Executa uma busca para resposta ajax
-	 * 
-	 * @return	void
-	 */
-	public function busca_ajax($texto='')
-	{
-		$modelClass 	= $this->modelClass;
-		$campo			= isset($this->$modelClass->displayField) ? $this->$modelClass->displayField : 'nome';
-		$this->layout	= 'ajax';
-		if ($this->usarScaffolds) $this->viewPath = 'Scaffolds';
-		$opc	= array();
-		$opc['order'][$modelClass.'.'.$campo] = 'asc';
-		$opc['fields'] = array($modelClass.'.'.$campo,$modelClass.'.'.$campo);
-		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*".mb_strtoupper($texto).".*");
-		//$this->Course->find("all", array("conditions" => array("Course.professor" => array("\$regex" => ".*Odinga.*"))));
-		$opc['limit'] = 10000;
-		$this->data = $this->$modelClass->find('list',$opc);
-	}
-
-	/**
 	 * Exibe o relatório de lista total
 	 * 
 	 * @model	string	$model	Nome do model
@@ -443,6 +423,29 @@ class AppController extends Controller {
 	}
 
 	/**
+	 * Executa uma busca para resposta ajax
+	 * 
+	 * @return	void
+	 */
+	public function busca_ajax($texto='')
+	{
+		$modelClass 	= $this->modelClass;
+		$campo			= isset($this->$modelClass->displayField) ? $this->$modelClass->displayField : 'nome';
+		$this->layout	= 'ajax';
+		if ($this->usarScaffolds) $this->viewPath = 'Scaffolds';
+
+		$texto = mb_strtoupper($texto,'UTF-8');
+
+		$opc	= array();
+		$opc['order'][$modelClass.'.'.$campo] = 'asc';
+		$opc['fields'] = array($modelClass.'.'.$campo,$modelClass.'.'.$campo);
+		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
+		
+		$opc['limit'] = 10000;
+		$this->data = $this->$modelClass->find('list',$opc);
+	}
+
+	/**
 	 * Executa uma pesquisa no banco de dados
 	 * 
 	 * @param	string	$campo	Campo a ser pesquisado.
@@ -460,7 +463,7 @@ class AppController extends Controller {
 		$texto = mb_strtoupper($texto,'UTF-8');
 
 		$opc = array();
-		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*");
+		$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';
 		$opc['limit'] = 100;
 		$pesquisa = $this->$modelClass->find('list',$opc);
