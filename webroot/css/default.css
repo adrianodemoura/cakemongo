@@ -156,7 +156,10 @@ body
 {
 	background: url(../img/bt_atualizar.png) no-repeat;
 }
-
+#btExcluir
+{
+	background: url(../img/bt_excluir.png) no-repeat;
+}
 #btNovo
 {
 	background: url(../img/bt_novo.png) no-repeat;

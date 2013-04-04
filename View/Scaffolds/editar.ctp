@@ -10,8 +10,18 @@
 		$url .= strtolower($this->name).'/salvar';
 		$this->Html->css('menu_listar', null, array('inline' => false));
 		$this->viewVars['onRead'] .= "\t".'$(".formEditar").click(function() { $(".divMenuLista").fadeOut(); });'."\n";
+		if ($id)
+		{
+			// botão novo
+			$this->viewVars['onRead'] .= "\t".'$("#btNovo").click(function() { document.location.href="'.$this->base.'/'.strtolower($this->name).'/editar/0" });'."\n";
+		}
 		// botão salvar
 		$this->viewVars['onRead'] .= "\t".'$("#btSalvar").click(function() { $("#form'.$modelClass.'").submit(); });'."\n";
+		if ($id)
+		{
+			// botão novo
+			$this->viewVars['onRead'] .= "\t".'$("#btExcluir").click(function() { if (confirm("Tem certeza em excluir este registro?")) document.location.href="'.$this->base.'/'.strtolower($this->name).'/excluir/'.$id.'" });'."\n";
+		}
 		// botão fechar
 		$this->viewVars['onRead'] .= "\t".'$("#btFechar").click(function() { document.location.href="'.$this->base.'/'.strtolower($this->name).'/listar" });'."\n";
 		// botão atualizar
@@ -48,9 +58,15 @@
 	<?php if ($id && isset($opcMenuLista)) echo $this->element('menu_lista',array('id'=>$id)) ?>
 	<div class='divBotoes'>
 		<?php if ($this->Html->getLink('/'.strtolower($this->name).'/salvar') && !isset($soLeitura)) : ?>
+		<?php if ($id) : ?>
+		<input type='button' name='btNovo' 	id='btNovo' class='botoes' title='Clique aqui para incluir um novo registro '/>
+		<input type='button' name='btExcluir'  id='btExcluir' class='botoes' onclick='return false;' title='Clique aqui para excluir o registro '/>
+		<?php endif ?>
 		<input type='button' name='btSalvar' id='btSalvar' class='botoes' title='Clique aqui para salvar '/>
 		<?php endif ?>
+		<?php if ($id) : ?>
 		<input type='button' name='btAtuali' id='btAtuali' class='botoes' title='Clique aqui para Atualizar '/>
+		<?php endif ?>
 		<input type='button' name='btFechar' id='btFechar' class='botoes' title='Clique aqui para salvar' />
 	</div>
 
