@@ -37,6 +37,8 @@ class AppController extends Controller {
 		$modelClass 					= $this->modelClass;
 		$this->viewVars['modelClass']	= $modelClass;
 		$this->viewVars['primaryKey']	= isset($this->$modelClass->primaryKey) ? $this->$modelClass->primaryKey : '';
+		$this->viewVars['displayField']	= isset($this->$modelClass->displayField) ? $this->$modelClass->displayField : '';
+		$this->viewVars['chave']		= $this->plugin.'.'.$this->name;
 
 		// verifica sessão
 		$this->setSessao();
@@ -233,7 +235,7 @@ class AppController extends Controller {
 	 */
 	public function listar()
 	{
-		$chave					= $this->plugin.'.'.$this->name;
+		$chave					= $this->viewVars['chave'];
 		$modelClass 			= $this->viewVars['modelClass'];
 
 		// direção, pagina e ordem

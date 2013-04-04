@@ -11,7 +11,7 @@
 			}
 		}
 	}
-	$indCor	= !empty($this->plugin) ? $this->Session->read('ordem.'.$this->plugin.'.'.$this->name) : $this->Session->read('ordem.'.$this->name);
+	$ordem = $this->Session->read('listar.'.$chave.'.ordem');
 ?>
 <style>
 	#pesquisa
@@ -30,7 +30,7 @@
 
 	<select name='slPesquisa' id='slPesquisa'>
 		<?php foreach($camposPesquisa as $_campo) : $selecao	= ''; $titulo = isset($schema[$_campo]['input']['label']) ? $schema[$_campo]['input']['label'] : ucfirst($_campo); ?>
-		<?php if ($_campo==$indCor) $selecao='selected="selected"';	?>
+		<?php if ($_campo==$ordem) $selecao='selected="selected"';	?>
 		<option <?= $selecao ?>  value='<?= $_campo ?>'><?= $titulo ?></option>
 		<?php endforeach ?>
 	</select>
