@@ -49,6 +49,7 @@ class Cidade extends AppModel {
 		),
 		'uf' 			=> array
 		(	'type' 		=> 'string',
+			'index'		=> true,
 			'length'	=> 2,
 			'input'		=> array('label'=>'Uf','style'=>'width: 30px; text-align: center')
 		),

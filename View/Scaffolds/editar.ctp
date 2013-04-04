@@ -105,16 +105,14 @@
 			// opções de relacionamento por multiplos valores
 			if (isset($p['tipo']) && $p['tipo']=='multiplo')
 			{
-				$m = $p['input']['options'];
+				$m = isset($p['input']['options']) ? $p['input']['options'] : array();
 
 				// procura opções na view
-				if (isset($this->viewVars[$m])) 
-					$p['input']['options'] = $this->viewVars[$m];
-				
+				if (!empty($m)) $p['input']['options'] = $m;
+
 				// procura opções no cache
-				if (is_string($p['input']['options'])) 
-					$p['input']['options'] = Cache::read($m);
-				
+				if (is_string($p['input']['options'])) $p['input']['options'] = Cache::read($m);
+
 				unset($p['input']['type']);
 				$p['input']['multiple'] = 'checkbox';
 			}
