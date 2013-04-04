@@ -70,6 +70,8 @@
 		<input type='button' name='btFechar' id='btFechar' class='botoes' title='Clique aqui para salvar' />
 	</div>
 
+	<?php echo $this->element('paginacao_edicao'); ?>
+
 </div>
 
 <div id='divForm<?= $modelClass ?>' class='formEditar'>
@@ -179,6 +181,6 @@
 			}
 		}
 	}
-	/*debug($this->data);
-	debug($this->viewVars);*/
+	/*debug($this->data);*/
+	debug($this->viewVars);
 ?>
