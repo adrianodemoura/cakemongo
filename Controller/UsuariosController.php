@@ -54,6 +54,15 @@ class UsuariosController extends AppController {
 	public function principal()
 	{
 		$this->viewVars['titulo'] = 'Acesso Rápido';
+		// recuperando os 5 últimos recados
+		App::uses('Mensagem','Model');
+		$Mensagem = new Mensagem();
+		$opc = array();
+		$opc['fields'] 	= array('texto');
+		$opc['limit']	= 5;
+		$opc['order']['Mensagem.modificado'] = 'desc';
+		$mensagens = $Mensagem->find('all',$opc);
+		$this->viewVars['mensagens'] = $mensagens;
 	}
 
 	/**

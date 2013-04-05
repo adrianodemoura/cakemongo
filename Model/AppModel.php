@@ -70,6 +70,7 @@ class AppModel extends Model {
 					if (in_array($_cmp,array('criado','modificado')))		$this->schema[$_cmp]['input']['readonly'] = 'readonly';
 					if (empty($this->schema[$_cmp]['input']['maxlength'])) $this->schema[$_cmp]['input']['maxlength'] = 20;
 					if (empty($this->schema[$_cmp]['mascara'])) 			$this->schema[$_cmp]['mascara'] = '99/99/9999 99:99';
+					if (empty($this->schema[$_cmp]['length'])) 			$this->schema[$_cmp]['length'] = 19;
 					break;
 			}
 		}

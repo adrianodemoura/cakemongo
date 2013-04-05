@@ -31,6 +31,21 @@
 	{
 		background-color: #b5d5fc;
 	}
+	#recados
+	{
+		width: 70%;
+		margin: 0px auto;
+	}
+	#recados h4
+	{
+		margin: 0px;
+	}
+	#recados p
+	{
+		margin: 0px;
+		padding: 0px;
+		line-height: 20px;
+	}
 </style>
 <br /><br />
 <center>Acesso Rápido</center>
@@ -47,10 +62,23 @@
 	echo $this->Html->getLinkLI('/ferramentas/index','Ferramentas','logo_ferramentas.png');
 	echo $this->Html->getLinkLI('/relatorios/index','Relatórios','logo_relatorios.png');
 	echo $this->Html->getLinkLI('/configuracoes/index','Configurações','logo_configuracoes.png');
+	echo $this->Html->getLinkLI('/mensagens/index','Mensagens','logo_mensagens.png');
 	if (!Configure::read('login0800'))
 	{
 		echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus Dados','logo_perfil.png');
 	}
 ?>
 </ul>
+</div>
+
+<?php if (count($mensagens)) : ?>
+<div id='recados'>
+<h3><center>Mensagens</center></h3>
+<ul>
+	<?php foreach($mensagens as $_l => $_arrMods) : ?>
+	<p>- <?= $_arrMods['Mensagem']['texto'] ?></p>
+	<?php endforeach ?>
+
+</ul>
+<?php endif ?>
 </div>

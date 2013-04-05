@@ -93,7 +93,7 @@ OBS:<br />
 	<?php
 	echo $this->Form->create('Importa', array('onsubmit'=>'return validaForm();','name'=>'ImportaCsv','id'=>'ImportaCsv','type' => 'file'));
 
-	echo $this->Form->input('model', 	array('label'=>'* Model a ser populado: ','div'=>array('class'=>'model'),'type' => 'text'));
+	echo $this->Form->input('model', 	array('label'=>'* Model a ser populado: ','div'=>array('class'=>'model'),'type' => 'text')).'<br />';
 	echo $this->Form->input('limite', 	array('label'=>'* Bloco/Limite: ','div'=>array('class'=>'limite'),'type' => 'text','default'=>$limite));
 	echo $this->Form->input('arquivo', array('label'=>'* arquivo: ','div'=>array('class'=>'arquivo'),'type' => 'file'));
 

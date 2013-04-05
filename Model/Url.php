@@ -7,6 +7,7 @@
  * 
  * @package		app.Model
  */
+App::uses('AppModel', 'Model');
 /**
  * @package		app.Model
  */
