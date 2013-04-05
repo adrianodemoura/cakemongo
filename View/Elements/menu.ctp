@@ -23,6 +23,7 @@
 						<?php echo $this->Html->getLinkLI('/relatorios/rel001','Total de Cidades por Estado'); ?>
 						<?php echo $this->Html->getLinkLI('/relatorios/rel002','Total de Acessos por Usuário'); ?>
 						<?php echo $this->Html->getLinkLI('/relatorios/rel003','Total de Usuários por Sexo'); ?>
+						<?php echo $this->Html->getLinkLI('/relatorios/rel004','Total de Usuários por Perfil'); ?>
 					</ul>
 				</li>
 			</ul>

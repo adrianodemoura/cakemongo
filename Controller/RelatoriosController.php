@@ -57,4 +57,16 @@ class RelatoriosController extends AppController {
 		$this->data 					= $this->listaGrupo('Usuario',array('key'=>'sexo'));
 		$this->viewVars['titulo'] 		= 'Relatório Sintético de Total de Usuários por Sexo';
 	}
+
+	/**
+	 * Imprime o relatório rel003 - Total de Usuários por Perfil
+	 * 
+	 * @return	void
+	 */
+	public function rel004()
+	{
+		$this->data 					= $this->listaGrupo('Usuario',array('key'=>'perfil'));
+		asort($this->request->data);
+		$this->viewVars['titulo'] 		= 'Relatório Sintético de Total de Usuários por Perfil';
+	}
 }
