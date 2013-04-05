@@ -70,7 +70,7 @@
 		<input type='button' name='btFechar' id='btFechar' class='botoes' title='Clique aqui para salvar' />
 	</div>
 
-	<?php echo $this->element('paginacao_edicao'); ?>
+	<?php if ($id) echo $this->element('paginacao_edicao'); ?>
 
 </div>
 

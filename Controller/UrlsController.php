@@ -32,5 +32,6 @@ class UrlsController extends AppController {
 		$opc['order']	= array('Perfil.nome'=>'asc');
 		$opc['fields'] 	= array('Perfil.nome','Perfil.nome');
 		$this->viewVars['perfis'] = $Perfil->find('list',$opc,'listaPerfil');
+		unset($this->viewVars['perfis']['ADMINISTRADOR']);
 	}
 }
