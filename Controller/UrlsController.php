@@ -33,5 +33,8 @@ class UrlsController extends AppController {
 		$opc['fields'] 	= array('Perfil.nome','Perfil.nome');
 		$this->viewVars['perfis'] = $Perfil->find('list',$opc,'listaPerfil');
 		unset($this->viewVars['perfis']['ADMINISTRADOR']);
+		$url = Router::url('/',true);
+		$url = substr($url,0,strlen($url)-1);
+		$this->viewVars['schema']['link']['input']['label'] = 'Url <span style="font-size: 9px;">'.$url.'</span>';
 	}
 }
