@@ -44,20 +44,22 @@
 	</tr>
 	
 </table>
+<?php
+	$urls	= Cache::read('urls'.$this->Session->read('Usuario.perfil'));
+	if (!empty($urls)) :
+?>
 <div id='linkA'>
 <b>Links de Acesso: </b>
 <ul>
-<?php
-	$urls	= Cache::read('urls'.$this->Session->read('Usuario.perfil'));
-	foreach($urls as $_url => $_v) : 
-?>
+<?php foreach($urls as $_url => $_v) :  ?>
 	
 	<li><a href='<?= Router::url('/',true).$_url ?>'><?= Router::url('/',true).substr($_url,1,strlen($_url)) ?></a></li>
 	
 <?php
-	endforeach
+	endforeach;
 ?>
 
 </ul>
 
 </div>
+<?php  endif; ?>

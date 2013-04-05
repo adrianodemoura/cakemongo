@@ -1,7 +1,7 @@
 CakeMongo
 
 1 - Requisitos
-mongoDB vrs. 2.2.3
+mongoDB vrs. 2.4.1
 PHP vrs. 5.1
 Memcached vrs. 1.4 (opcional)
 
@@ -23,5 +23,7 @@ Desta forma não será necessário login para acessar o sistema, então será po
 criar o usuário administrador bem como os perfis de usuários que o sistema deve possuir.
 
 Depois do usuário administrador e perfis criados, edita novamente o arquivo APP/Config/core.php e 
-altere "login0800" para false. Execute log-off e diverta-se.
+altere "login0800" para false. 
+
+Execute log-off e diverta-se.
 
