@@ -157,7 +157,6 @@ class UsuariosController extends AppController {
 	 */
 	public function meus_dados()
 	{
-		$modelClass 	= $this->viewVars['modelClass'];
 		if (isset($this->data['Usuario'][$this->viewVars['primaryKey']]))
 		{
 			try
@@ -176,9 +175,8 @@ class UsuariosController extends AppController {
 				$this->redirect('listar');
 			}
 		}
-		$id				= $this->Session->read('Usuario.'.$this->viewVars['primaryKey']);
-		$this->data		= $this->$modelClass->read(null,$id);
-		$this->viewVars['titulo']	= 'Editando o Usuário '.$this->data['Usuario']['nome'];
+		$this->request->data		= $this->Usuario->read(null,$this->Session->read('Usuario._id'));
+		$this->viewVars['titulo']	= 'Editando o Usuário '.$this->Session->read('Usuario.nome');
 	}
 
 	/**

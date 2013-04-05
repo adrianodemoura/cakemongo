@@ -94,7 +94,7 @@
 
 	</tr>
 <?php endforeach ?>
-	<?php if (isset($this->request->params['paging'][$modelClass]['count'])) : ?>
+	<?php if (isset($this->request->params['paging'][$modelClass]['count']) && ($this->request->params['paging'][$modelClass]['count']) ) : ?>
 	<tr>
 		<td colspan='<?= count($this->viewVars['listaCampos'])+1 ?>' >
 		Total: <?= number_format($this->request->params['paging'][$modelClass]['count'],0,',','.') ?>

@@ -47,7 +47,10 @@
 	echo $this->Html->getLinkLI('/ferramentas/index','Ferramentas','logo_ferramentas.png');
 	echo $this->Html->getLinkLI('/relatorios/index','Relatórios','logo_relatorios.png');
 	echo $this->Html->getLinkLI('/configuracoes/index','Configurações','logo_configuracoes.png');
-	echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus Dados','logo_perfil.png');
+	if (!Configure::read('login0800'))
+	{
+		echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus Dados','logo_perfil.png');
+	}
 ?>
 </ul>
 </div>

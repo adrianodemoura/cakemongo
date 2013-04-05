@@ -10,7 +10,7 @@
 						<?php echo $this->Html->getLinkLI('/perfis/listar','Perfis'); ?>
 						<?php echo $this->Html->getLinkLI('/urls/listar','Permissões'); ?>
 						<?php echo $this->Html->getLinkLI('/usuarios/listar','Usuários'); ?>
-						<?php echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus dados'); ?>
+						<?php if (!Configure::read('login0800')) echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus dados'); ?>
 
 					</ul>
 				</li>

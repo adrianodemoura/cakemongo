@@ -149,6 +149,7 @@ class Perfil extends AppModel {
 	 */
 	public function afterSave($criou) 
 	{
+		$perfil = isset($this->data['Perfil']['nome']) ? $perfil = $this->data['Perfil']['nome'] : '';
 		$opc['conditions']['Perfil.nome'] = 'asc';
 		$lista = $this->find('list',$opc);
 		foreach($lista as $_id => $_perfil) Cache::delete('urls'.$_perfil);
@@ -157,17 +158,15 @@ class Perfil extends AppModel {
 		Cache::delete('listPerfil');
 
 		parent::afterSave($criou);
-		/*
-		 * está gerando duplicidade, tem que buscar as urls aonde o link já existe.
-		 */
-		if ($criou)
+
+		// se criou
+		if ($criou && !empty($perfil) && !in_array($perfil,array('ADMINISTRADOR')))
 		{
 			$links['0'] = '/ajuda/sobre_mim';
 			$links['1'] = '/acessos/listar';
 			$links['2'] = '/usuarios/meus_dados';
 
 			// recuperando as permissões já configuradas, pq deve sofrer update e não insert
-			$perfil = $this->data['Perfil']['nome'];
 			App::uses('Url','Model');
 			$Url 	= new Url();
 			$opc	= array();
