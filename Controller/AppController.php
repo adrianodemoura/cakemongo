@@ -323,9 +323,6 @@ class AppController extends Controller {
 		$chave		= $this->viewVars['chave'];
 		$modelClass = $this->viewVars['modelClass'];
 		$vizinhos	= array();
-
-		$opc				= array();
-		$opc['conditions'][$modelClass.'.'.$this->viewVars['primaryKey']] 	= $id;
 		$this->data = $this->$modelClass->read(null,$id);
 		$this->viewVars['titulo']	= 'Editando '.$this->name;
 
@@ -333,22 +330,36 @@ class AppController extends Controller {
 		$ordem = $this->Session->read('listar.'.$chave.'.ordem');
 
 		// recuperando o primeiro e último
-		/*$primeiro 	= $this->$modelClass->find('first', array('order'=>array($ordem=>'asc'),'fields'=>'_id')); 
-		$primeiro 	= !empty($primeiro) ? $primeiro[$modelClass]['_id'] : 0;*/
+		$primeiro 	= $this->$modelClass->find('first', array('order'=>array($ordem=>'asc'),'fields'=>'_id')); 
+		$primeiro 	= !empty($primeiro) ? $primeiro[$modelClass]['_id'] : 0;
+		$vizinhos['r'] = $primeiro;
 
 		if ($id)
 		{
-			$anterior 	= $this->$modelClass->find('first', array(''=>$this->data[$modelClass][$ordem],'limit'=>1,'order'=>array($ordem=>'asc'),'fields'=>$ordem));
+			$anterior 	= $this->$modelClass->find('first', array
+			(
+				'conditions'	=> array($modelClass.'.'.$ordem=>array('$lt'=>$this->data[$modelClass][$ordem])),
+				'limit'			=> 1,
+				'order'			=> array($ordem=>'desc'),
+				'fields'		=> $ordem
+			));
 			$anterior 	= !empty($anterior) ? $anterior[$modelClass]['_id'] : 0;
 			$vizinhos['a'] = $anterior;
 
-			$proximo 	= $this->$modelClass->find('first', array(''=>$this->data[$modelClass][$ordem],'limit'=>1,'order'=>array($ordem=>'desc'),'fields'=>$ordem));
+			$proximo 	= $this->$modelClass->find('first', array
+			(
+				'conditions'	=> array($modelClass.'.'.$ordem=>array('$gt'=>$this->data[$modelClass][$ordem])),
+				'limit'			=> 1,
+				'order'			=> array($ordem=>'asc'),
+				'fields'		=> $ordem
+			));
 			$proximo 	= !empty($proximo) ? $proximo[$modelClass]['_id'] : 0;
 			$vizinhos['p'] = $proximo;
 		}
 
-		/*$ultimo		= $this->$modelClass->find('first', array('order'=>array($ordem=>' DESC'),'fields'=>'_id'));
-		$ultimo		= !empty($ultimo[$modelClass]['_id']) ? $ultimo[$modelClass]['_id'] : 0;*/
+		$ultimo		= $this->$modelClass->find('first', array('order'=>array($ordem=>'desc'),'fields'=>'_id'));
+		$ultimo		= !empty($ultimo[$modelClass]['_id']) ? $ultimo[$modelClass]['_id'] : 0;
+		$vizinhos['u'] = $ultimo;
 
 		if ($this->usarScaffolds) $this->viewPath = 'Scaffolds';
 		$this->set(compact('vizinhos'));

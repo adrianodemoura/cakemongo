@@ -181,6 +181,6 @@
 			}
 		}
 	}
-	/*debug($this->data);*/
-	debug($this->viewVars);
+	//debug($this->data);
+	//debug($this->viewVars);
 ?>
