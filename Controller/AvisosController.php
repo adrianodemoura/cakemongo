@@ -1,20 +1,21 @@
 <?php
 /**
- * Cadastro de Mensagens
+ * Cadastro de Avisos
+ * Aqui o usuário poderá cadastros avisos para todos.
  * 
  * @package       app.Controller
  */
 /**
  * @package       app.Controller
  */
-class MensagensController extends AppController {
+class AvisosController extends AppController {
 	/**
-	 * Model usuarios
+	 * Model
 	 * 
 	 * @var		array
 	 * @link	http://book.cakephp.org/2.0/en/controllers.html#components-helpers-and-uses
 	 */
-	public $uses = array('Mensagem');
+	public $uses = array('Aviso');
 
 	/**
 	 * Executa código antes da renderização da view
@@ -24,7 +25,7 @@ class MensagensController extends AppController {
 	public function beforeRender()
 	{
 		parent::beforeRender();
-		$this->viewVars['edicaoCampos'] = array('Mensagem.texto','-','Mensagem.modificado','Mensagem.criado');
-		$this->viewVars['focus'] = 'Mensagem.texto';
+		$this->viewVars['edicaoCampos'] = array('Aviso.texto','-','Aviso.modificado','Aviso.criado');
+		$this->viewVars['focus'] = 'Aviso.texto';
 	}
 }

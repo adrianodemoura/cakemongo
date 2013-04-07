@@ -1,6 +1,6 @@
 <?php
 /**
- * Mensagem Model
+ * Aviso Model
  * 
  * @package		app.Model
  */
@@ -8,7 +8,7 @@ App::uses('AppModel', 'Model');
 /**
  * @package		app.Model
  */
-class Mensagem extends AppModel {
+class Aviso extends AppModel {
 	/**
 	 * Nome do campo de exibição personalizada. 
 	 *
@@ -25,7 +25,7 @@ class Mensagem extends AppModel {
 	 * @var		string
 	 * @link	http://book.cakephp.org/2.0/en/models/model-attributes.html#usetable
 	 */
-	public $useTable 		= 'mensagens';
+	public $useTable 		= 'avisos';
 
 	/**
 	 * Campos a serem salvos do jeito que foram digitados.\n

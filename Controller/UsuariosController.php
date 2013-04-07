@@ -55,14 +55,14 @@ class UsuariosController extends AppController {
 	{
 		$this->viewVars['titulo'] = 'Acesso Rápido';
 		// recuperando os 5 últimos recados
-		App::uses('Mensagem','Model');
-		$Mensagem = new Mensagem();
+		App::uses('Aviso','Model');
+		$Aviso = new Aviso();
 		$opc = array();
 		$opc['fields'] 	= array('texto');
 		$opc['limit']	= 5;
-		$opc['order']['Mensagem.modificado'] = 'desc';
-		$mensagens = $Mensagem->find('all',$opc);
-		$this->viewVars['mensagens'] = $mensagens;
+		$opc['order']['Aviso.modificado'] = 'desc';
+		$avisos = $Aviso->find('all',$opc);
+		$this->viewVars['avisos'] = $avisos;
 	}
 
 	/**
@@ -186,6 +186,7 @@ class UsuariosController extends AppController {
 		}
 		$this->request->data		= $this->Usuario->read(null,$this->Session->read('Usuario._id'));
 		$this->viewVars['titulo']	= 'Editando o Usuário '.$this->Session->read('Usuario.nome');
+		$this->setPerfis();
 	}
 
 	/**
@@ -196,12 +197,33 @@ class UsuariosController extends AppController {
 	 */
 	public function editar($id=0)
 	{
+		$this->setPerfis();
+		parent::editar($id);
+	}
+
+	/**
+	 * Salva um registro de usuários
+	 * 
+	 * @return	void;
+	 */
+	public function salvar()
+	{
+		$this->setPerfis();
+		parent::salvar();
+	}
+
+	/**
+	 * Popula a camada de visão com todos os perfis
+	 * 
+	 * @return	void
+	 */
+	private function setPerfis()
+	{
 		App::uses('Perfil','Model');
 		$opc 			= array();
 		$opc['fields']	= array('Perfil.nome','Perfil.nome');
 		$opc['order']['Perfil.nome'] = 'asc';
 		$Perfil = new Perfil();
 		$this->viewVars['perfis'] = $Perfil->find('list',$opc,'listPerfil');
-		parent::editar($id);
 	}
 }

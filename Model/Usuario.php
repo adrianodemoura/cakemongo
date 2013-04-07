@@ -124,7 +124,7 @@ class Usuario extends AppModel {
 		(
 			'type'		=> 'string',
 			'length'	=> 30,
-			'input'		=> array('label'=>'Perfil','options'=>'perfis'),
+			'input'		=> array('label'=>'Perfil','options'=>'perfis','default'=>'USUÁRIO'),
 		),
 		'acessos'		=> array
 		(

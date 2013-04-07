@@ -31,16 +31,16 @@
 	{
 		background-color: #b5d5fc;
 	}
-	#recados
+	#avisos
 	{
 		width: 70%;
 		margin: 0px auto;
 	}
-	#recados h4
+	#avisos h4
 	{
 		margin: 0px;
 	}
-	#recados p
+	#avisos p
 	{
 		margin: 0px;
 		padding: 0px;
@@ -54,29 +54,26 @@
 	
 <ul>
 <?php
-	echo $this->Html->getLinkLI('/usuarios/listar','Usuários','logo_usuarios.png');
-	echo $this->Html->getLinkLI('/ajuda/sobre_mim','Sobre Mim','sobre_mim.png');
-	echo $this->Html->getLinkLI('/urls/listar','Permissões de Acesso','logo_urls.png');
-	echo $this->Html->getLinkLI('/acessos/listar','Meus Acessos','logo_acessos.png');
-	echo $this->Html->getLinkLI('/perfis/listar','Perfis','logo_perfis.png');
-	echo $this->Html->getLinkLI('/ferramentas/index','Ferramentas','logo_ferramentas.png');
-	echo $this->Html->getLinkLI('/relatorios/index','Relatórios','logo_relatorios.png');
+	echo $this->Html->getLinkLI('/avisos/listar','Avisos','logo_mensagens.png');
 	echo $this->Html->getLinkLI('/configuracoes/index','Configurações','logo_configuracoes.png');
-	echo $this->Html->getLinkLI('/mensagens/index','Mensagens','logo_mensagens.png');
-	if (!Configure::read('login0800'))
-	{
-		echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus Dados','logo_perfil.png');
-	}
+	echo $this->Html->getLinkLI('/ferramentas/index','Ferramentas','logo_ferramentas.png');
+	echo $this->Html->getLinkLI('/acessos/listar','Meus Acessos','logo_acessos.png');
+	if (!Configure::read('login0800')) echo $this->Html->getLinkLI('/usuarios/meus_dados','Meus Dados','logo_perfil.png');
+	echo $this->Html->getLinkLI('/perfis/listar','Perfis','logo_perfis.png');
+	echo $this->Html->getLinkLI('/urls/listar','Permissões de Acesso','logo_urls.png');
+	echo $this->Html->getLinkLI('/relatorios/index','Relatórios','logo_relatorios.png');
+	echo $this->Html->getLinkLI('/ajuda/sobre_mim','Sobre Mim','sobre_mim.png');
+	echo $this->Html->getLinkLI('/usuarios/listar','Usuários','logo_usuarios.png');
 ?>
 </ul>
 </div>
 
-<?php if (count($mensagens)) : ?>
-<div id='recados'>
+<?php if (count($avisos)) : ?>
+<div id='avisos'>
 <h3><center>Avisos</center></h3>
 <ul>
-	<?php foreach($mensagens as $_l => $_arrMods) : ?>
-	<p>- <?= $_arrMods['Mensagem']['texto'] ?></p>
+	<?php foreach($avisos as $_l => $_arrMods) : ?>
+	<p>- <?= $_arrMods['Aviso']['texto'] ?></p>
 	<?php endforeach ?>
 
 </ul>
