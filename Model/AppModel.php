@@ -175,6 +175,13 @@ class AppModel extends Model {
 					}
 				}
 			}
+			if (isset($this->data[$this->name][$this->primaryKey]) && empty($this->data[$this->name][$this->primaryKey]))
+			{
+				if (isset($this->schema['criado']))
+				{
+					$this->data[$this->name]['criado'] = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
+				}
+			}
 		}
 		return true;
 	}

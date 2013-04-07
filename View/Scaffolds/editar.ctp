@@ -37,10 +37,10 @@
 	$this->viewVars['edicaoCampos'] = isset($this->viewVars['edicaoCampos']) ? $this->viewVars['edicaoCampos'] : array();
 	if (empty($id)) // removendo criado e modificado na inclusão
 	{
-		if (in_array('Usuario.modificado',$this->viewVars['edicaoCampos']))
+		if (in_array($modelClass.'.modificado',$this->viewVars['edicaoCampos']))
 		{
-			unset($this->viewVars['edicaoCampos'][array_search('Usuario.criado',$this->viewVars['edicaoCampos'])]);
-			unset($this->viewVars['edicaoCampos'][array_search('Usuario.modificado',$this->viewVars['edicaoCampos'])]);
+			unset($this->viewVars['edicaoCampos'][array_search($modelClass.'.criado',$this->viewVars['edicaoCampos'])]);
+			unset($this->viewVars['edicaoCampos'][array_search($modelClass.'.modificado',$this->viewVars['edicaoCampos'])]);
 			$ul = count($this->viewVars['edicaoCampos']);
 			if ($this->viewVars['edicaoCampos'][$ul-1]=='-' || $this->viewVars['edicaoCampos'][$ul-1]=='#')
 			{

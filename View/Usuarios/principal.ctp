@@ -73,7 +73,7 @@
 
 <?php if (count($mensagens)) : ?>
 <div id='recados'>
-<h3><center>Mensagens</center></h3>
+<h3><center>Avisos</center></h3>
 <ul>
 	<?php foreach($mensagens as $_l => $_arrMods) : ?>
 	<p>- <?= $_arrMods['Mensagem']['texto'] ?></p>
