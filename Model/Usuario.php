@@ -224,6 +224,7 @@ class Usuario extends AppModel {
 	 * - O Usuário administrador sempre DEVE estar ativo.\n
 	 * - O Usuário administrador sempre DEVE estar no Perfil Administrador.\n
 	 * - O Campo criado deve ser configurado na inclusão.\n
+	 * - Somente o usuário Administrador pode alterar o perfil dos demais usuários.\n
 	 *
 	 * @param	array	$options
 	 * @return	boolean	Verdadeiro se a operação deve continuar, false se deve abordar.
@@ -244,17 +245,12 @@ class Usuario extends AppModel {
 				unset($this->data['Usuario']['senha']);
 			}
 		}
-		// usuário administrador, sempre administrador.
+		// usuário administrador, sempre administrador, sempre ativo.
 		if (isset($this->data['Usuario']['login']) && $this->data['Usuario']['login']=='admin')
 		{
 			$this->data['Usuario']['login'] = 'admin';
 			$this->data['Usuario']['perfil']= 'ADMINISTRADOR';
 			$this->data['Usuario']['ativo'] = true;
-		}
-		// campo criado
-		if (empty($this->data['Usuario'][$this->primaryKey]))
-		{
-			$this->data['Usuario']['criado'] = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
 		}
 		return parent::beforeSave($options);
 	}

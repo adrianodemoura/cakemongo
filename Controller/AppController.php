@@ -120,7 +120,7 @@ class AppController extends Controller {
 
 //			Cache::delete('urls'.$perfil);
 			$urls	= Cache::read('urls'.$perfil);
-			if (!$urls)
+			if (!$urls && $perfil!='ADMINISTRADOR')
 			{
 				App::uses('Url','Model');
 				$Url 	= new Url();

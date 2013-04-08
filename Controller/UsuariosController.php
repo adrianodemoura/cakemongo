@@ -186,7 +186,10 @@ class UsuariosController extends AppController {
 		}
 		$this->request->data		= $this->Usuario->read(null,$this->Session->read('Usuario._id'));
 		$this->viewVars['titulo']	= 'Editando o Usuário '.$this->Session->read('Usuario.nome');
-		$this->setPerfis();
+		if (isset($this->data['Usuario']['perfil']) && $this->data['Usuario']['perfil']=='ADMINISTRADOR')
+		{
+			$this->setPerfis();
+		}
 	}
 
 	/**
@@ -197,8 +200,11 @@ class UsuariosController extends AppController {
 	 */
 	public function editar($id=0)
 	{
-		$this->setPerfis();
 		parent::editar($id);
+		if ($this->Session->read('Usuario.perfil')=='ADMINISTRADOR')
+		{
+			$this->setPerfis();
+		}
 	}
 
 	/**
@@ -208,7 +214,6 @@ class UsuariosController extends AppController {
 	 */
 	public function salvar()
 	{
-		$this->setPerfis();
 		parent::salvar();
 	}
 
