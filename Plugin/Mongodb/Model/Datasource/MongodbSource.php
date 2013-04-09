@@ -646,12 +646,44 @@ class MongodbSource extends DboSource {
 			$this->error = $e->getMessage();
 			trigger_error($this->error);
 		}
-		if ($this->fullDebug) {
-			$this->logQuery("db.{$Model->useTable}.group( :key, :initial, :reduce, :options )", $params);
+		if ($this->fullDebug) 
+		{
+			$key 		= '';	foreach($params['key'] as $_cmp => $_vlr) 		$key 		.= '{"'.$_cmp.'":'.$_vlr.'}';
+			$initial 	= '';	foreach($params['initial'] as $_cmp => $_vlr) $initial 	.= '{'.$_cmp.': '.$_vlr.'}';
+			$opt	 	= '';	foreach($options as $_cmp => $_vlr) 	$opt 	.= $_cmp.': '.$_vlr;
+			$this->logQuery("db.{$Model->useTable}.group({ key:{$key}, initial: {$initial}, reduce: $reduce })", $params);
 		}
 
-
 		return $return;
+	}
+
+	/**
+	 * Método aggregate
+	 * 
+	 * return	void
+	 */
+	public function aggregate(&$Model, $params=array())
+	{
+		if (!$this->isConnected() || count($params) === 0 ) return false;
+
+		$this->_prepareLogQuery($Model); // Iniciando temporizador
+
+		$project = isset($params['project'])	? $params['project'] 	: array();
+		$unwind	 = isset($params['unwind'])		? $params['unwind'] 	: array();
+		$group	 = isset($params['group'])		? $params['group'] 		: array();
+
+		try
+		{
+			$retorno = $this->_db->selectCollection($Model->table)->aggregate($project, $unwind, $group);
+		} catch (MongoException $e)
+		{
+			$this->error = $e->getMessage();
+			trigger_error($this->error);
+		}
+
+		if ($this->fullDebug) $this->logQuery("db.{$Model->useTable}.aggregate( :project, :unwind, :group )", $params);
+
+		return $retorno;
 	}
 
 

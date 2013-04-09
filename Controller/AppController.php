@@ -435,7 +435,8 @@ class AppController extends Controller {
 	}
 
 	/**
-	 * Exibe o relatório de lista total
+	 * Exibe o relatório de lista total.\n
+	 * - a função group não tem sort (order by).\n
 	 * 
 	 * @model	string	$model	Nome do model
 	 * @opc		array	$opc	Opções para o método group do mongoDB
