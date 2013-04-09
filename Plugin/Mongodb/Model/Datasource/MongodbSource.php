@@ -617,10 +617,8 @@ class MongodbSource extends DboSource {
  *           'key' => array('field' => true),
  *           'initial' => array('csum' => 0),
  *           'reduce' => 'function(obj, prev){prev.csum += 1;}',
- *           'options' => array(
- *                'condition' => array('age' => array('$gt' => 20)),
- *                'finalize' => array(),
- *           ),
+ * 			'cond' => array('age' => array('$gt' => 20)),
+ *          'finalize' => function(prev),
  *       );
  * @return void
  * @access public
@@ -633,15 +631,16 @@ class MongodbSource extends DboSource {
 
 		$this->_prepareLogQuery($Model); // just sets a timer
 
-		$key = (empty($params['key'])) ? array() : $params['key'];
-		$initial = (empty($params['initial'])) ? array() : $params['initial'];
-		$reduce = (empty($params['reduce'])) ? array() : $params['reduce'];
-		$options = (empty($params['options'])) ? array() : $params['options'];
+		$key 		= (empty($params['key'])) 		? array() : $params['key'];
+		$initial 	= (empty($params['initial'])) 	? array() : $params['initial'];
+		$reduce 	= (empty($params['reduce'])) 	? array() : $params['reduce'];
+		$cond	 	= (empty($params['cond'])) 		? array() : $params['cond'];
+		$finalize	= (empty($params['finalize'])) 	? array() : $params['finalize'];
 
 		try{
 			$return = $this->_db
 				->selectCollection($Model->table)
-				->group($key, $initial, $reduce, $options);
+				->group($key, $initial, $reduce);
 		} catch (MongoException $e) {
 			$this->error = $e->getMessage();
 			trigger_error($this->error);
@@ -650,8 +649,12 @@ class MongodbSource extends DboSource {
 		{
 			$key 		= '';	foreach($params['key'] as $_cmp => $_vlr) 		$key 		.= '{"'.$_cmp.'":'.$_vlr.'}';
 			$initial 	= '';	foreach($params['initial'] as $_cmp => $_vlr) $initial 	.= '{'.$_cmp.': '.$_vlr.'}';
-			$opt	 	= '';	foreach($options as $_cmp => $_vlr) 	$opt 	.= $_cmp.': '.$_vlr;
-			$this->logQuery("db.{$Model->useTable}.group({ key:{$key}, initial: {$initial}, reduce: $reduce })", $params);
+			$query		= "db.{$Model->useTable}.group({ key:{$key}, initial: {$initial}, ";
+			if (!empty($cond)) 	$query 		.= "cond: $cond";
+			if (!empty($finalize))	$finalize	.= "finalize: $finalize";
+			if (!empty($reduce)) 	$query 		.= '$'."reduce: $reduce";
+			$query .= " })";
+			$this->logQuery($query, $params);
 		}
 
 		return $return;
