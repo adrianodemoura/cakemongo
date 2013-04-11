@@ -17,7 +17,7 @@ class Agenda extends AppModel {
 	 * @var		string
 	 * @link	http://book.cakephp.org/2.0/en/models/model-attributes.html#displayfield
 	 */
-	public $displayField 	= 'modificado';
+	public $displayField 	= 'data_txt';
 
 	/**
 	 * Nome da collection do banco de dados, ou nulo caso não possua tabela.
@@ -48,16 +48,45 @@ class Agenda extends AppModel {
 			'length'	=> 250,
 			'input'		=> array('label'=>'Texto','style'=>array('width: 600px; text-transform: none;'))
 		),
-		'modificado'	=> array
+		'data_txt'	=> array
 		(	'type' 		=> 'integer',
 			'index'		=> true,
 			'tipo'		=> 'datatempo',
-			'input'		=> array('label'=>'Modificado')
+			'input'		=> array('label'=>'Data/Hora')
 		),
 		'criado'		=> array
 		(	'type' 		=> 'integer',
 			'tipo'		=> 'datatempo',
 			'input'		=> array('label'=>'Criado')
 		)
+	);
+
+	/**
+	 * Regras de validação para cada campo do módulo
+	 * 
+	 * @var		array
+	 * @link	http://book.cakephp.org/2.0/en/models/model-attributes.html#validate
+	 * @link	http://book.cakephp.org/2.0/en/models/data-validation.html
+	 */
+	public $validate = array
+	(
+		'texto' => array
+		(
+			1 	=> array
+			(
+				'rule' 		=> 'notEmpty',
+				'required' 	=> true,
+				'message' 	=> 'É necessário informar o texto!',
+			)
+		),
+		'data_txt' => array
+		(
+			1 	=> array
+			(
+				'rule' 		=> 'notEmpty',
+				'required' 	=> true,
+				'message' 	=> 'É necessário informar a data e horário!',
+			)
+		),
 	);
 }

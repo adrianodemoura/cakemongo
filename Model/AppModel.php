@@ -131,7 +131,7 @@ class AppModel extends Model {
 					$tipo = isset($this->schema[$_cmp]['tipo']) ? $this->schema[$_cmp]['tipo'] : $tipo;
 
 					// limpando a máscara
-					if (isset($this->schema[$_cmp]['mascara']))
+					if (isset($this->schema[$_cmp]['mascara']) )
 					{
 						$m = str_replace('9','',$this->schema[$_cmp]['mascara']);
 						for($i=0; $i<strlen($m); $i++)
@@ -149,7 +149,9 @@ class AppModel extends Model {
 							if ($_vlr)
 							{
 								// transformando o campo data em segundos, porque vou salvar em segundos.
-								$_vlr	= str_replace('-','',$_vlr);
+								$_vlr	= str_replace('/','',$_vlr);
+								$_vlr	= str_replace(' ','',$_vlr);
+								$_vlr	= str_replace(':','',$_vlr);
 								$ano	= substr($_vlr,4,4);
 								$mes	= substr($_vlr,2,2);
 								$dia	= substr($_vlr,0,2);
@@ -157,7 +159,6 @@ class AppModel extends Model {
 								$minu	= substr($_vlr,10,2);
 								$segu	= date('s');
 								$this->data[$_mod][$_cmp] = mktime($hora,$minu,$segu,$mes,$dia,$ano);
-								//debug($_vlr); debug($this->schema[$_cmp]);
 							}
 							if ($_cmp=='modificado')
 							{

@@ -1,5 +1,5 @@
-<?php 
-	setlocale(LC_TIME, 'ptb', 'pt_BR', 'portuguese-brazil', 'bra', 'brazil', 'pt_BR.utf-8', 'pt_BR.utf-8','br');
+<?php
+	$dias = $this->Html->getDiaSemanas();
 	$this->viewVars['onRead'] .= "\t".'$("#AgendaMes").change(function() 
 	{ 
 		var mes = $(this).val(); 
@@ -13,14 +13,25 @@
 		var ano = $(this).val();
 		var url = "'.Router::url('/',true).'agenda/index/"+mes+"/"+ano;
 		document.location.href=url;
-	});'.";\n";
+	});'."\n";
+	/*$this->viewVars['onRead'] .= "\t".'$("td").click(function(e)
+	{
+		var dia = $(this).attr("id");
+		if (dia)
+		{
+			var mes = $("#AgendaMes").val();
+			var ano = $("#AgendaAno").val();
+			var url = "'.Router::url('/',true).'agenda/editar/"+dia+"/"+mes+"/"+ano;
+			document.location.href=url;
+		}
+	});'."\n";*/
+	
 ?>
-
 <style>
 	.agenda
 	{
-		margin: 40px auto;
-		width: 800px;
+		margin: 10px auto;
+		width: 1000px;
 	}
 	.navAgenda
 	{
@@ -64,15 +75,28 @@
 	}
 	.tabAgenda tr td
 	{
-		width: 110px;
+		width: 150px;
 		height: 90px;
 		border: 1px solid #ccc;
-		vertical-align: center;
+		vertical-align: top;
+	}
+	.tabAgenda tr td:hover
+	{
+		cursor: pointer;
+		background-color: #eee;
 	}
 	#nomeMes
 	{
 		width: 150px;
 		text-align: left;
+	}
+	.hoje
+	{
+		background-color: #B5D5FC;
+	}
+	.celulaDia
+	{
+		color: #333;
 	}
 </style>
 
@@ -95,22 +119,25 @@
 
 <table class='tabAgenda' cellpadding='0' cellspacing='0'>
 	<tr>
-<?php $dias = $this->Html->getDiaSemanas(); foreach($dias as $_n => $_nome) : ?>
+<?php foreach($dias as $_n => $_nome) : ?>
 	<th><?= $_nome ?></th>
 <?php endforeach ?>
 	</tr>
-	
-<?php for($l=1; $l<6; $l++) : ?>
+
+<?php foreach($calendario as $_semana => $_arrDias) : ?>
 	<tr>
+<?php foreach($_arrDias as $_idS => $_dia) : ?>
+	<?php if ($_dia) : ?>
+	<td	<?php if ($_dia==date('d') && $mes==date('m')) echo "class='hoje'" ?> id='<?= $_dia ?>'>
+	<span class='celulaDia'><?= $_dia ?></span>
+	</td>
+	<?php else : ?>
+	<td class='hojeNao'>-</td>
+	<?php endif ?>
 
-	<?php for($c=1; $c<8; $c++) : ?>
-		<td>
-			*
-		</td>
-	<?php endfor ?>
-
+<?php endforeach ?>
 	</tr>
-<?php endfor ?>
+<?php endforeach ?>
 
 </table>
 

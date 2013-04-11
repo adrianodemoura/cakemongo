@@ -137,13 +137,13 @@ class AppHelper extends Helper {
 	 */
 	public function getDiaSemanas()
 	{
-		$dias['1'] = 'Domingo';
-		$dias['2'] = 'Segunda';
-		$dias['3'] = 'Terça';
-		$dias['4'] = 'Quarta';
-		$dias['5'] = 'Quinta';
-		$dias['6'] = 'Sexta';
-		$dias['7'] = 'Sábado';
+		$dias['0'] = 'Domingo';
+		$dias['1'] = 'Segunda';
+		$dias['2'] = 'Terça';
+		$dias['3'] = 'Quarta';
+		$dias['4'] = 'Quinta';
+		$dias['5'] = 'Sexta';
+		$dias['6'] = 'Sábado';
 		return $dias;
 	}
 }

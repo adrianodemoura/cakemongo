@@ -329,13 +329,14 @@ class AppController extends Controller {
 		// ordem
 		$ordem = $this->Session->read('listar.'.$chave.'.ordem');
 
-		// recuperando o primeiro e último
-		$primeiro 	= $this->$modelClass->find('first', array('order'=>array($ordem=>'asc'),'fields'=>'_id')); 
-		$primeiro 	= !empty($primeiro) ? $primeiro[$modelClass]['_id'] : 0;
-		$vizinhos['r'] = $primeiro;
 
 		if ($id)
 		{
+			// recuperando o primeiro e último
+			$primeiro 	= $this->$modelClass->find('first', array('order'=>array($ordem=>'asc'),'fields'=>'_id')); 
+			$primeiro 	= !empty($primeiro) ? $primeiro[$modelClass]['_id'] : 0;
+			$vizinhos['r'] = $primeiro;
+		
 			$anterior 	= $this->$modelClass->find('first', array
 			(
 				'conditions'	=> array($modelClass.'.'.$ordem=>array('$lt'=>$this->data[$modelClass][$ordem])),
@@ -355,11 +356,11 @@ class AppController extends Controller {
 			));
 			$proximo 	= !empty($proximo) ? $proximo[$modelClass]['_id'] : 0;
 			$vizinhos['p'] = $proximo;
+			
+			$ultimo		= $this->$modelClass->find('first', array('order'=>array($ordem=>'desc'),'fields'=>'_id'));
+			$ultimo		= !empty($ultimo[$modelClass]['_id']) ? $ultimo[$modelClass]['_id'] : 0;
+			$vizinhos['u'] = $ultimo;
 		}
-
-		$ultimo		= $this->$modelClass->find('first', array('order'=>array($ordem=>'desc'),'fields'=>'_id'));
-		$ultimo		= !empty($ultimo[$modelClass]['_id']) ? $ultimo[$modelClass]['_id'] : 0;
-		$vizinhos['u'] = $ultimo;
 
 		if ($this->usarScaffolds) $this->viewPath = 'Scaffolds';
 		$this->set(compact('vizinhos'));
@@ -511,5 +512,58 @@ class AppController extends Controller {
 
 		$pesquisa 		= $this->$modelClass->find('list',$opc);
 		$this->set(compact('url','pesquisa'));
+	}
+
+	/**
+	 * Retorna uma matriz com todos os dias de um mẽs
+	 * 
+	 * @param	integer	$mes
+	 * @param	integer	$ano
+	 * @return	array	$calendario
+	 */
+	function getCalendario($mes,$ano)
+	{
+		// Primeiro dia do mes
+		$primeiro_dia = mktime(0, 0, 0, $mes, 1,$ano);
+
+		// Numero de dias no mes corrente
+		$num_dias = date('t', $primeiro_dia);
+
+		// O primeiro dia cai no dia da semana
+		$pri_dia_sem = date('w', $primeiro_dia);
+
+		/**
+		* Digamos que neste mes X o primeiro dia começa na Quarta e tem 30 dias
+		* A estrutura do Array ficará:
+		* $calendario = array(
+		* 0 => array( NULL, NULL, NULL, 1, 2, 3, 4),
+		* 1 => array( 5, 6, 7, 8, 9, 10, 11),
+		* 2 => array( 12, 13, 14, 15, 16, 17, 18),
+		* 3 => array( 19, 20, 21, 22, 23, 24, 25),
+		* 4 => array( 26, 27, 28, 29, 30, NULL, NULL)
+		* );
+		*/
+
+		if($pri_dia_sem > 0) $calendario = array(0 => array_fill(0, $pri_dia_sem, NULL));
+
+		$dia 		= 1;
+		$semana 	= 0;
+		$dia_semana = $pri_dia_sem;
+		while ($dia <= $num_dias)
+		{
+			if ($dia_semana >= 7) 
+			{
+				$dia_semana = 0;
+				$semana++;
+			}
+			$calendario[$semana][$dia_semana] = $dia;
+			$dia++;
+			$dia_semana++;
+		}
+		if($dia_semana < 7)
+		{
+			$calendario[$semana] += array_fill($dia_semana, 7-$dia_semana, NULL);
+		}
+		return $calendario;
 	}
 }

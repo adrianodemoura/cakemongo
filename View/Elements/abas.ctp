@@ -1,5 +1,6 @@
 <?php 
 	if ($this->Html->getLink('/acessos/listar')) 	$abas['Acessos'] 	= Router::url('/',true).'acessos/listar';
+	if ($this->Html->getLink('/agenda/listar')) 	$abas['Agenda'] 	= Router::url('/',true).'agenda/listar';
 	if ($this->Html->getLink('/avisos/listar')) 	$abas['Avisos'] 	= Router::url('/',true).'avisos/listar';
 	if ($this->Html->getLink('/cidades/listar')) 	$abas['Cidades'] 	= Router::url('/',true).'cidades/listar';
 	if ($this->Html->getLink('/perfis/listar'))		$abas['Perfis'] 	= Router::url('/',true).'perfis/listar';
