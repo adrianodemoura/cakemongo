@@ -129,4 +129,21 @@ class AppHelper extends Helper {
 		}
 		return $link;
 	}
+
+	/**
+	 * Retorna uma matriz com os dias da seman por extenso
+	 * 
+	 * @return	array	$dias
+	 */
+	public function getDiaSemanas()
+	{
+		$dias['1'] = 'Domingo';
+		$dias['2'] = 'Segunda';
+		$dias['3'] = 'Terça';
+		$dias['4'] = 'Quarta';
+		$dias['5'] = 'Quinta';
+		$dias['6'] = 'Sexta';
+		$dias['7'] = 'Sábado';
+		return $dias;
+	}
 }

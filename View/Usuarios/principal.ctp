@@ -54,6 +54,7 @@
 	
 <ul>
 <?php
+	echo $this->Html->getLinkLI('/agenda/index','Agenda','logo_agendas.png');
 	echo $this->Html->getLinkLI('/avisos/listar','Avisos','logo_mensagens.png');
 	echo $this->Html->getLinkLI('/configuracoes/index','Configurações','logo_configuracoes.png');
 	echo $this->Html->getLinkLI('/ferramentas/index','Ferramentas','logo_ferramentas.png');
