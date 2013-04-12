@@ -239,7 +239,7 @@
 <tr>
 <?php foreach($_arrDias as $_idS => $_arrProp) : ?>
 	<?php if ($_arrProp['dia']) : ?>
-	<td	<?php if ($_arrProp['dia']==date('d') && $mes==date('m')) echo "class='hoje'" ?>>
+	<td	<?php if ($_arrProp['dia']==date('d') && $mes==date('m') && $ano==date('Y')) echo "class='hoje'" ?>>
 		<span class='celulaDia'><?= $_arrProp['dia'] ?></span><br />
 
 		<?php if (isset($_arrProp['msgs']['0']['hora'])) : ?>
