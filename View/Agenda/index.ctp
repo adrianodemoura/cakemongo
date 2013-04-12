@@ -16,7 +16,7 @@
 	});'."\n";
 	$this->viewVars['onRead'] .= "\t".'$(".celNovo").click(function() 
 	{ 
-		var id = parseInt($(this).attr("id").replace("celNovo",""));
+		var id = $(this).attr("id").replace("celNovo","");
 		setEvento(""+id+"");
 	});'."\n";
 	$this->viewVars['onRead'] .= "\t".'$("#formEvento").submit(function() 
@@ -251,10 +251,10 @@
 			</div>
 			<?php endforeach ?>
 		<?php else : $id = '0'.$_arrProp['dia']; ?>
-		<div class='celNovo' id='celNovo<?= $id ?>' title='Clique aqui para criar um novo evento ...'>
-			<div class='agId' id='<?= $id.'id' ?>'>0</div>
-			&nbsp;
-		</div>
+			<div class='celNovo' id='celNovo<?= $id ?>' title='Clique aqui para criar um novo evento ...'>
+				<div class='agId' id='<?= $id.'id' ?>'>0</div>
+				&nbsp;
+			</div>
 		<?php endif ?>
 
 	</td>
@@ -290,3 +290,4 @@
 	</div>
 	</form>
 </div>
+<?= debug($calendario); ?>

@@ -34,7 +34,7 @@ class AgendaController extends AppController {
 		
 		// configurando minutos
 		$minutos = array();
-		for($i=0; $i<60; $i++) $minutos[$i] = $i;
+		for($i=0; $i<13; $i++) $minutos[($i*5)] = ($i*5);
 
 		// configurando mês e anos vizinhos
 		$mesA = $mes-1;
