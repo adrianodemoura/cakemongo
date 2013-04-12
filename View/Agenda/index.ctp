@@ -104,6 +104,8 @@
 	{
 		width: 150px;
 		text-align: left;
+		margin: 0px 0px 0px 10px;
+		text-transform: uppercase;
 	}
 	.hoje
 	{
@@ -290,4 +292,3 @@
 	</div>
 	</form>
 </div>
-<?= debug($calendario); ?>
