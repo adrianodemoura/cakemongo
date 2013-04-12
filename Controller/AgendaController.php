@@ -59,7 +59,7 @@ class AgendaController extends AppController {
 		$meses 	= array();
 		$anos	= array();
 		for($i=1; $i<13; $i++) $meses[$i] = $i;
-		for($i=date('Y')-20; $i<date('Y')+30; $i++) $anos[$i] = $i;
+		for($i=date('Y')-20; $i<date('Y')+10; $i++) $anos[$i] = $i;
 		
 		// configurando o primeiro dia do mês
 		$prDiaSem = date('w', strtotime("$ano/$mes/1"));
@@ -69,7 +69,7 @@ class AgendaController extends AppController {
 
 		// configurando o primeiro e o último dia do mẽs corrente
 		$hora_pri = mktime(0,0,0,$mes,1,$ano);
-		$hora_ult = mktime(0,0,0,$mes,date('t', $hora_pri),$ano);
+		$hora_ult = mktime(23,59,59,$mes,date('t', $hora_pri),$ano);
 
 		// recuperando as mensagens do mês e ano
 		$opc = array();

@@ -17,6 +17,7 @@
 	$this->viewVars['onRead'] .= "\t".'$(".celNovo").click(function() 
 	{ 
 		var id = $(this).attr("id").replace("celNovo","");
+		id = id.replace("id","");
 		setEvento(""+id+"");
 	});'."\n";
 	$this->viewVars['onRead'] .= "\t".'$("#formEvento").submit(function() 
