@@ -58,8 +58,20 @@ class AgendaController extends AppController {
 		// configurando meses e anos
 		$meses 	= array();
 		$anos	= array();
-		for($i=1; $i<13; $i++) $meses[$i] = $i;
+		//for($i=1; $i<13; $i++) $meses[$i] = $i;
 		for($i=date('Y')-20; $i<date('Y')+10; $i++) $anos[$i] = $i;
+		$meses['1'] = 'Janeiro';
+		$meses['2'] = 'Fevereiro';
+		$meses['3'] = 'Março';
+		$meses['4'] = 'Abril';
+		$meses['5'] = 'Maio';
+		$meses['6'] = 'Junho';
+		$meses['7'] = 'Julho';
+		$meses['8'] = 'Agosto';
+		$meses['9'] = 'Setembro';
+		$meses['10'] = 'Outubro';
+		$meses['11'] = 'Novembro';
+		$meses['12'] = 'Dezembro';
 		
 		// configurando o primeiro dia do mês
 		$prDiaSem = date('w', strtotime("$ano/$mes/1"));

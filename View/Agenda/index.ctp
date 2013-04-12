@@ -107,6 +107,7 @@
 		text-align: left;
 		margin: 0px 0px 0px 10px;
 		text-transform: uppercase;
+		display: none;
 	}
 	.hoje
 	{
@@ -222,7 +223,7 @@
 		<li style='background-color: #eee; color: #ccc;'>Hoje</li>
 		<?php endif ?>
 		<li><a href='<?= $linkP ?>'> > </a></li>
-		<li><?php echo $this->Form->input('Agenda.mmes',array('value'=>$mes,'label'=>false,'type'=>'select','options'=>$meses)) ?></li>
+		<li style='width: 100px;'><?php echo $this->Form->input('Agenda.mmes',array('value'=>$mes,'label'=>false,'type'=>'select','options'=>$meses)) ?></li>
 		<li><?php echo $this->Form->input('Agenda.aano',array('value'=>$ano,'label'=>false,'type'=>'select','options'=>$anos)) ?></li>
 		<li id='nomeMes'><span><?= utf8_encode(strftime("%B de %Y", strtotime("$ano-$mes-$dia"))); ?></span></li>
 	</ul>
