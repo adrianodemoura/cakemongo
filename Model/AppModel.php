@@ -149,9 +149,11 @@ class AppModel extends Model {
 							if ($_vlr)
 							{
 								// transformando o campo data em segundos, porque vou salvar em segundos.
+								$_vlr	= str_replace('-','',$_vlr);
 								$_vlr	= str_replace('/','',$_vlr);
 								$_vlr	= str_replace(' ','',$_vlr);
 								$_vlr	= str_replace(':','',$_vlr);
+
 								$ano	= substr($_vlr,4,4);
 								$mes	= substr($_vlr,2,2);
 								$dia	= substr($_vlr,0,2);
