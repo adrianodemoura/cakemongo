@@ -107,7 +107,7 @@ class AgendaController extends AppController {
 						if ($_dia==$dia)
 						{
 							$calendario[$_idS][$_idN]['msgs'][$lc]['id'] 	= $_arrMods['Agenda']['_id'];
-							$calendario[$_idS][$_idN]['msgs'][$lc]['texto'] = $_arrMods['Agenda']['texto'];
+							$calendario[$_idS][$_idN]['msgs'][$lc]['evento']= $_arrMods['Agenda']['evento'];
 							$calendario[$_idS][$_idN]['msgs'][$lc]['hora'] 	= substr($_arrMods['Agenda']['data_txt'],11,5);
 							$lc++;
 						}
@@ -150,7 +150,7 @@ class AgendaController extends AppController {
 			$dataEv = $data['dia'].'/'.$data['mes'].'/'.$data['ano'].' '.$data['hora'].':'.$data['minu'].':'.date('s');
 			$this->request->data = array();
 			$this->request->data['0']['Agenda']['_id'] 		= isset($data['_id']) ? $data['_id'] : 0;
-			$this->request->data['0']['Agenda']['texto'] 	= isset($data['texto']) ? $data['texto'] : '';
+			$this->request->data['0']['Agenda']['evento'] 	= isset($data['evento']) ? $data['evento'] : '';
 			$this->request->data['0']['Agenda']['data_txt']	= $dataEv;
 			if (!$this->Agenda->saveAll($this->data))
 			{
@@ -187,8 +187,8 @@ class AgendaController extends AppController {
 	 */
 	public function editar($id=0)
 	{
-		$this->viewVars['edicaoCampos'] = array('Agenda.texto','#','Agenda.data_txt');
-		$this->viewVars['focus'] = 'Agenda.texto';
+		$this->viewVars['edicaoCampos'] = array('Agenda.evento','#','Agenda.data_txt');
+		$this->viewVars['focus'] = 'Agenda.evento';
 		parent::editar($id);
 		if ($id==0)
 		{

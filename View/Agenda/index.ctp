@@ -22,10 +22,10 @@
 	});'."\n";
 	$this->viewVars['onRead'] .= "\t".'$("#formEvento").submit(function() 
 	{ 
-		if ($("#AgendaTexto").val()=="")
+		if ($("#AgendaEvento").val()=="")
 		{
-			alert("Texto inválido !!!");
-			$("#AgendaTexto").focus();
+			alert("Evento inválido !!!");
+			$("#AgendaEvento").focus();
 			return false;
 		}
 		if ($("#AgendaHora").val()=="0")
@@ -158,7 +158,7 @@
 		margin: 0px 5px 0px 0px;
 		line-height: 24px;
 	}
-	#evento #AgendaTexto,
+	#evento #AgendaEvento,
 	#evento #AgendaId
 	{
 		width: 400px;
@@ -208,7 +208,7 @@
 	{
 		width: 50px;
 	}
-	.agTexto
+	.agEvento
 	{
 		display: none;
 	}
@@ -262,10 +262,10 @@
 			<?php foreach($_arrProp['msgs'] as $_l => $_arrCmps) : $id = $_arrCmps['id'].$_arrProp['dia']; ?>
 			<div id='celula<?= $id ?>'>
 				<div class='agId' id='<?= $id.'id' ?>'><?= $_arrCmps['id'] ?></div>
-				<a title='<?= $_arrCmps["texto"] ?>' class='celulaA' href='' onclick="return setEvento('<?= $id ?>');">
+				<a title='<?= $_arrCmps["evento"] ?>' class='celulaA' href='' onclick="return setEvento('<?= $id ?>');">
 				<div class='agHora' id='<?= $id.'hora' ?>'><?= $_arrCmps['hora'] ?></div>
-				<?= substr($_arrCmps['texto'],0,10).' ...' ?>
-				<div class='agTexto' id='<?= $id.'texto' ?>'><?= $_arrCmps['texto'] ?></div>
+				<?= substr($_arrCmps['evento'],0,10).' ...' ?>
+				<div class='agEvento' id='<?= $id.'evento' ?>'><?= $_arrCmps['evento'] ?></div>
 				</a>
 			</div>
 			<?php endforeach ?>
@@ -297,7 +297,7 @@
 	<?php echo $this->Form->input('Agenda.hora',array('label'=>false,'div'=>null,'options'=>$horas)) ?> horas e
 	<?php echo $this->Form->input('Agenda.minu',array('label'=>false,'div'=>null,'options'=>$minutos)) ?> minutos.
 	<br /><br />
-	<label>texto:</label><?php echo $this->Form->input('Agenda.texto',array('label'=>false,'div'=>null,'type'=>'text')) ?>
+	<label>Evento:</label><?php echo $this->Form->input('Agenda.evento',array('label'=>false,'div'=>null,'type'=>'text')) ?>
 	<br />
 	<?php echo $this->Form->input('Agenda._id',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>
 	<?php echo $this->Form->input('Agenda.dia',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>

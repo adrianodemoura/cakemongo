@@ -32,7 +32,7 @@ class Agenda extends AppModel {
 	 *
 	 * @var 	array
 	 */
-	public $ignorarMaiusculo = array('texto');
+	public $ignorarMaiusculo = array('evento');
 
 	/**
 	 * Esquema
@@ -42,11 +42,11 @@ class Agenda extends AppModel {
 	public $schema = array
 	(
 		'_id' 			=> array('type' => 'integer', 'primary' => true, 'length'=>24),
-		'texto' 		=> array
+		'evento' 		=> array
 		(	'type' 		=> 'string',
 			'index'		=> true,
 			'length'	=> 250,
-			'input'		=> array('label'=>'Texto','style'=>array('width: 600px; text-transform: none;'))
+			'input'		=> array('label'=>'Evento','style'=>array('width: 600px; text-transform: none;'))
 		),
 		'data_txt'	=> array
 		(	'type' 		=> 'integer',
@@ -70,13 +70,13 @@ class Agenda extends AppModel {
 	 */
 	public $validate = array
 	(
-		'texto' => array
+		'evento' => array
 		(
 			1 	=> array
 			(
 				'rule' 		=> 'notEmpty',
 				'required' 	=> true,
-				'message' 	=> 'É necessário informar o texto!',
+				'message' 	=> 'É necessário informar o Evento!',
 			)
 		),
 		'data_txt' => array

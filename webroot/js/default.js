@@ -97,7 +97,7 @@
 		var idEv	= $("#"+id+"id").text();
 		var hora	= $("#"+id+"hora").text().split(':');
 		var minu	= parseInt(hora['1']);
-		var texto 	= $("#"+id+"texto").text();
+		var evento 	= $("#"+id+"evento").text();
 		hora 		= parseInt(hora['0']);
 
 		var dia		= parseInt(id.replace(idEv,''));
@@ -113,7 +113,7 @@
 
 		$("#AgendaHora").find("option[value='"+hora+"']").attr("selected",true);
 		$("#AgendaMinu").find("option[value='"+minu+"']").attr("selected",true);
-		$("#AgendaTexto").val(texto);
+		$("#AgendaEvento").val(evento);
 		$("#AgendaId").val(idEv);
 		$("#AgendaDia").val(dia);
 		$("#AgendaMes").val(mes);
