@@ -262,7 +262,7 @@
 			<?php foreach($_arrProp['msgs'] as $_l => $_arrCmps) : $id = $_arrCmps['id'].$_arrProp['dia']; ?>
 			<div id='celula<?= $id ?>'>
 				<div class='agId' id='<?= $id.'id' ?>'><?= $_arrCmps['id'] ?></div>
-				<a class='celulaA' href='' onclick="return setEvento('<?= $id ?>');">
+				<a title='<?= $_arrCmps["texto"] ?>' class='celulaA' href='' onclick="return setEvento('<?= $id ?>');">
 				<div class='agHora' id='<?= $id.'hora' ?>'><?= $_arrCmps['hora'] ?></div>
 				<?= substr($_arrCmps['texto'],0,10).' ...' ?>
 				<div class='agTexto' id='<?= $id.'texto' ?>'><?= $_arrCmps['texto'] ?></div>
