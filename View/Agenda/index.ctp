@@ -118,6 +118,17 @@
 		color: #333;
 		display: block;
 		float: right;
+		/*background-color: #ddd;*/
+		width: 30px;
+		text-align: center;
+	}
+	.celulaDia a
+	{
+			display: block;
+	}
+	.celulaDia a:hover
+	{
+		background-color: #B5D5FC;
 	}
 	#evento
 	{
@@ -152,13 +163,15 @@
 	{
 		width: 400px;
 	}
-	#evento #evSalvar
+	#evento #evSalvar,
+	#evento #evExcluir
 	{
 		border: none;
 		padding: 5px;
 		background-color: #eee;
 		text-align: center;
 		margin: 0px auto;
+		cursor: pointer;
 	}
 	#evFechar
 	{
@@ -241,7 +254,9 @@
 <?php foreach($_arrDias as $_idS => $_arrProp) : ?>
 	<?php if ($_arrProp['dia']) : ?>
 	<td	<?php if ($_arrProp['dia']==date('d') && $mes==date('m') && $ano==date('Y')) echo "class='hoje'" ?>>
-		<span class='celulaDia'><?= $_arrProp['dia'] ?></span><br />
+		<span class='celulaDia'>
+			<a href='' title='Clique aqui para inserir um novo evento ...' onclick='return setEvento("0<?= $_arrProp['dia'] ?>")'><?= $_arrProp['dia'] ?></a>
+		</span><br />
 
 		<?php if (isset($_arrProp['msgs']['0']['hora'])) : ?>
 			<?php foreach($_arrProp['msgs'] as $_l => $_arrCmps) : $id = $_arrCmps['id'].$_arrProp['dia']; ?>
@@ -254,11 +269,6 @@
 				</a>
 			</div>
 			<?php endforeach ?>
-		<?php else : $id = '0'.$_arrProp['dia']; ?>
-			<div class='celNovo' id='celNovo<?= $id ?>' title='Clique aqui para criar um novo evento ...'>
-				<div class='agId' id='<?= $id.'id' ?>'>0</div>
-				&nbsp;
-			</div>
 		<?php endif ?>
 
 	</td>
@@ -271,6 +281,11 @@
 <?php endforeach ?>
 
 </table>
+<p class='obs'>
+<center>
+* Clique no dia para criar um novo evento.
+</center>
+</p>
 
 </div>
 <div id='evento'>
@@ -291,6 +306,7 @@
 	</div>
 	<div id='evBotoes'>
 		<input type='submit' name='evSalvar' value='Salvar Evento' id='evSalvar' />
+		<input type='submit' name='evExcluir' value='Excluir Evento' id='evExcluir' />
 	</div>
 	</form>
 </div>

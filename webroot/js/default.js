@@ -106,6 +106,11 @@
 
 		var mesAno = dia+' '+$("#nomeMes").text()+' as ';
 
+		if (!idEv)
+		{
+			$("#evExcluir").hide();
+		}
+
 		$("#AgendaHora").find("option[value='"+hora+"']").attr("selected",true);
 		$("#AgendaMinu").find("option[value='"+minu+"']").attr("selected",true);
 		$("#AgendaTexto").val(texto);

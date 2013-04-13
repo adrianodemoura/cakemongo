@@ -129,8 +129,9 @@ class AgendaController extends AppController {
 	{
 		$this->layout 	= 'ajax';
 		$msg			= '';
-		// se o form foi postado
-		if ($this->request->isPost())
+
+		// se o form foi postado para salvar
+		if ($this->request->isPost() && isset($this->data['evSalvar']))
 		{
 			unset($this->request->data['evSalvar']);
 			$data = $this->data['Agenda'];
@@ -160,6 +161,21 @@ class AgendaController extends AppController {
 			}
 			$this->redirect('index/'.$data['mes'].'/'.$data['ano']);
 		}
+
+		// se o form foi postado para excluir
+		if ($this->request->isPost() && isset($this->data['evExcluir']))
+		{
+			unset($this->request->data['evExcluir']);
+			if (!$this->Agenda->delete($this->data['Agenda']['_id']))
+			{
+				$this->Session->setFlash('Não foi possível s excluir o evento !!!','default',array('class'=>'msgErro'));
+			} else
+			{
+				$this->Session->setFlash('O Evento foi excluido com sucesso !!!','default',array('class'=>'msgOk'));
+			}
+			$this->redirect('index/'.$this->data['Agenda']['mes'].'/'.$this->data['Agenda']['ano']);
+		}
+
 		$this->set(compact('msg'));
 	}
 
