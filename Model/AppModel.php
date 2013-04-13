@@ -152,12 +152,15 @@ class AppModel extends Model {
 								$_vlr	= str_replace('/','',$_vlr);
 								$_vlr	= str_replace(' ','',$_vlr);
 								$_vlr	= str_replace(':','',$_vlr);
+								$_vlr	= str_replace('-','',$_vlr);
+
 								$ano	= substr($_vlr,4,4);
 								$mes	= substr($_vlr,2,2);
 								$dia	= substr($_vlr,0,2);
 								$hora	= substr($_vlr,8,2);
 								$minu	= substr($_vlr,10,2);
 								$segu	= date('s');
+
 								$this->data[$_mod][$_cmp] = mktime($hora,$minu,$segu,$mes,$dia,$ano);
 							}
 							if ($_cmp=='modificado')

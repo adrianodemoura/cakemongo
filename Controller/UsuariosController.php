@@ -94,7 +94,7 @@ class UsuariosController extends AppController {
 				} else
 				{
 					unset($dataUs['0']['Usuario']['senha']);
-					debug($dataUs);
+					//debug($dataUs);
 					$acessos = isset($dataUs['0']['Usuario']['acessos']) ? $dataUs['0']['Usuario']['acessos'] : 0;
 					$novaData['Usuario'][$this->viewVars['primaryKey']] 		= $dataUs['0']['Usuario'][$this->viewVars['primaryKey']];
 					$novaData['Usuario']['perfil'] 		= $dataUs['0']['Usuario']['perfil'];

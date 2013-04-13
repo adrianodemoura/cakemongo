@@ -88,4 +88,33 @@
 			}
 		}
 	}
-	
+
+	/**
+	 * 
+	 */
+	function setEvento(id)
+	{
+		var idEv	= $("#"+id+"id").text();
+		var hora	= $("#"+id+"hora").text().split(':');
+		var minu	= parseInt(hora['1']);
+		var texto 	= $("#"+id+"texto").text();
+		hora 		= parseInt(hora['0']);
+
+		var dia		= parseInt(id.replace(idEv,''));
+		var mes		=  $("#AgendaMmes").val();
+		var ano		=  $("#AgendaAano").val();
+
+		var mesAno = dia+' '+$("#nomeMes").text()+' as ';
+
+		$("#AgendaHora").find("option[value='"+hora+"']").attr("selected",true);
+		$("#AgendaMinu").find("option[value='"+minu+"']").attr("selected",true);
+		$("#AgendaTexto").val(texto);
+		$("#AgendaId").val(idEv);
+		$("#AgendaDia").val(dia);
+		$("#AgendaMes").val(mes);
+		$("#AgendaAno").val(ano);
+		$("#evMesAno").text(mesAno);
+		$("#tampa").show();
+		$("#evento").show();
+		return false;
+	}

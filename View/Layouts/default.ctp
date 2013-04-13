@@ -90,5 +90,6 @@ $(document).ready(function()
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 
+	<div id='tampa'></div>
 </body>
 </html>

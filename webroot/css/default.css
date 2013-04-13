@@ -288,3 +288,17 @@ body
 	border: 0px;
 	height: 28px;
 }
+
+#tampa
+{
+	background-color: #000;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity:0.65;
+	-moz-opacity: 0.65;
+	filter: alpha(opacity=65);
+}

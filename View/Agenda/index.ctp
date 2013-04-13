@@ -1,31 +1,47 @@
 <?php
 	$dias = $this->Html->getDiaSemanas();
-	$this->viewVars['onRead'] .= "\t".'$("#AgendaMes").change(function() 
+	$this->viewVars['onRead'] .= "\t".'$("#AgendaMmes").change(function() 
 	{ 
 		var mes = $(this).val(); 
-		var ano = $("#AgendaAno").val(); 
+		var ano = $("#AgendaAano").val(); 
 		var url = "'.Router::url('/',true).'agenda/index/"+mes+"/"+ano;
 		document.location.href=url;
 	});'.";\n";
-	$this->viewVars['onRead'] .= "\t".'$("#AgendaAno").change(function() 
+	$this->viewVars['onRead'] .= "\t".'$("#AgendaAano").change(function() 
 	{ 
-		var mes = $("#AgendaMes").val();
+		var mes = $("#AgendaMmes").val();
 		var ano = $(this).val();
 		var url = "'.Router::url('/',true).'agenda/index/"+mes+"/"+ano;
 		document.location.href=url;
 	});'."\n";
-	/*$this->viewVars['onRead'] .= "\t".'$("td").click(function(e)
-	{
-		var dia = $(this).attr("id");
-		if (dia)
+	$this->viewVars['onRead'] .= "\t".'$(".celNovo").click(function() 
+	{ 
+		var id = $(this).attr("id").replace("celNovo","");
+		id = id.replace("id","");
+		setEvento(""+id+"");
+	});'."\n";
+	$this->viewVars['onRead'] .= "\t".'$("#formEvento").submit(function() 
+	{ 
+		if ($("#AgendaTexto").val()=="")
 		{
-			var mes = $("#AgendaMes").val();
-			var ano = $("#AgendaAno").val();
-			var url = "'.Router::url('/',true).'agenda/editar/"+dia+"/"+mes+"/"+ano;
-			document.location.href=url;
+			alert("Texto inválido !!!");
+			$("#AgendaTexto").focus();
+			return false;
 		}
-	});'."\n";*/
-	
+		if ($("#AgendaHora").val()=="0")
+		{
+			alert("Hora inválida !!!");
+			$("#AgendaHora").focus();
+			return false;
+		}
+		if ($("#AgendaMinu").val()=="0")
+		{
+			alert("Minuto inválido !!!");
+			$("#AgendaMinu").focus();
+			return false;
+		}
+		return true;
+	});'."\n";
 ?>
 <style>
 	.agenda
@@ -79,16 +95,19 @@
 		height: 90px;
 		border: 1px solid #ccc;
 		vertical-align: top;
+		font-size: 10px;
 	}
-	.tabAgenda tr td:hover
+	.tabAgenda tr td div
 	{
-		cursor: pointer;
-		background-color: #eee;
+		float: left;
 	}
 	#nomeMes
 	{
 		width: 150px;
 		text-align: left;
+		margin: 0px 0px 0px 10px;
+		text-transform: uppercase;
+		display: none;
 	}
 	.hoje
 	{
@@ -97,6 +116,99 @@
 	.celulaDia
 	{
 		color: #333;
+		display: block;
+		float: right;
+	}
+	#evento
+	{
+		background-color: #fff;
+		width: 600px;
+		height: 200px;
+		border: 1px solid #ccc;
+		display: none;
+		position: absolute;
+		top: 30%;
+		left: 45%;
+		margin-left: -200px;
+		z-index: 1001;
+		border-radius: 8px; /* CSS 3 */
+		-o-border-radius: 8px; /* Opera */
+		-icab-border-radius: 8px; /* iCab */
+		-khtml-border-radius: 8px; /* Konqueror */
+		-moz-border-radius: 8px; /* Firefox */
+		-webkit-border-radius: 8px; /* Safari */
+	}
+	#evento label
+	{
+		display: block;
+		float: left;
+		width: 90px;
+		text-align: right;
+		margin: 0px 5px 0px 0px;
+		line-height: 24px;
+	}
+	#evento #AgendaTexto,
+	#evento #AgendaId
+	{
+		width: 400px;
+	}
+	#evento #evSalvar
+	{
+		border: none;
+		padding: 5px;
+		background-color: #eee;
+		text-align: center;
+		margin: 0px auto;
+	}
+	#evFechar
+	{
+		width: 20px;
+		display: block;
+		/*background-color: #B5D5FC;*/
+		width: 100%;
+		text-align: right;
+		cursor: pointer;
+		height: 46px;
+		line-height: 40px;
+	}
+	#evCampos
+	{
+		padding: 10px;
+	}
+	.agId
+	{
+		display: none;
+	}
+	.agHora
+	{
+		display: block;
+		width: 40px;
+		text-align: center;
+	}
+	#evBotoes
+	{
+		text-align: center;
+	}
+	#AgendaDia,
+	#AgendaMes,
+	#AgendaAno
+	{
+		width: 50px;
+	}
+	.agTexto
+	{
+		display: none;
+	}
+	.celNovo
+	{
+		display: table;
+		width: 100%;
+		height: 85%;
+	}
+	.celNovo:hover
+	{
+		background-color: #eee;
+		cursor: pointer;
 	}
 </style>
 
@@ -111,34 +223,74 @@
 		<li style='background-color: #eee; color: #ccc;'>Hoje</li>
 		<?php endif ?>
 		<li><a href='<?= $linkP ?>'> > </a></li>
-		<li><?php echo $this->Form->input('Agenda.mes',array('value'=>$mes,'label'=>false,'type'=>'select','options'=>$meses)) ?></li>
-		<li><?php echo $this->Form->input('Agenda.ano',array('value'=>$ano,'label'=>false,'type'=>'select','options'=>$anos)) ?></li>
+		<li style='width: 100px;'><?php echo $this->Form->input('Agenda.mmes',array('value'=>$mes,'label'=>false,'type'=>'select','options'=>$meses)) ?></li>
+		<li><?php echo $this->Form->input('Agenda.aano',array('value'=>$ano,'label'=>false,'type'=>'select','options'=>$anos)) ?></li>
 		<li id='nomeMes'><span><?= utf8_encode(strftime("%B de %Y", strtotime("$ano-$mes-$dia"))); ?></span></li>
 	</ul>
 </div>
 
 <table class='tabAgenda' cellpadding='0' cellspacing='0'>
-	<tr>
+<tr>
 <?php foreach($dias as $_n => $_nome) : ?>
 	<th><?= $_nome ?></th>
 <?php endforeach ?>
-	</tr>
+</tr>
 
 <?php foreach($calendario as $_semana => $_arrDias) : ?>
-	<tr>
-<?php foreach($_arrDias as $_idS => $_dia) : ?>
-	<?php if ($_dia) : ?>
-	<td	<?php if ($_dia==date('d') && $mes==date('m')) echo "class='hoje'" ?> id='<?= $_dia ?>'>
-	<span class='celulaDia'><?= $_dia ?></span>
+<tr>
+<?php foreach($_arrDias as $_idS => $_arrProp) : ?>
+	<?php if ($_arrProp['dia']) : ?>
+	<td	<?php if ($_arrProp['dia']==date('d') && $mes==date('m') && $ano==date('Y')) echo "class='hoje'" ?>>
+		<span class='celulaDia'><?= $_arrProp['dia'] ?></span><br />
+
+		<?php if (isset($_arrProp['msgs']['0']['hora'])) : ?>
+			<?php foreach($_arrProp['msgs'] as $_l => $_arrCmps) : $id = $_arrCmps['id'].$_arrProp['dia']; ?>
+			<div id='celula<?= $id ?>'>
+				<div class='agId' id='<?= $id.'id' ?>'><?= $_arrCmps['id'] ?></div>
+				<a class='celulaA' href='' onclick="return setEvento('<?= $id ?>');">
+				<div class='agHora' id='<?= $id.'hora' ?>'><?= $_arrCmps['hora'] ?></div>
+				<?= substr($_arrCmps['texto'],0,10).' ...' ?>
+				<div class='agTexto' id='<?= $id.'texto' ?>'><?= $_arrCmps['texto'] ?></div>
+				</a>
+			</div>
+			<?php endforeach ?>
+		<?php else : $id = '0'.$_arrProp['dia']; ?>
+			<div class='celNovo' id='celNovo<?= $id ?>' title='Clique aqui para criar um novo evento ...'>
+				<div class='agId' id='<?= $id.'id' ?>'>0</div>
+				&nbsp;
+			</div>
+		<?php endif ?>
+
 	</td>
 	<?php else : ?>
 	<td class='hojeNao'>-</td>
 	<?php endif ?>
 
 <?php endforeach ?>
-	</tr>
+</tr>
 <?php endforeach ?>
 
 </table>
 
+</div>
+<div id='evento'>
+	<form id='formEvento' name='formEvento' method='post' action='<?= Router::url('/',true) ?>agenda/salvar_evento'>
+	<span id='evFechar'><a href='#' onclick='$("#evento").hide(); $("#tampa").hide(); return false;'>[x] Fechar&nbsp;&nbsp;</a></span>
+	<div id='evCampos'>
+	<label>Quando:</label>
+	<span id='evMesAno'></span>
+	<?php echo $this->Form->input('Agenda.hora',array('label'=>false,'div'=>null,'options'=>$horas)) ?> horas e
+	<?php echo $this->Form->input('Agenda.minu',array('label'=>false,'div'=>null,'options'=>$minutos)) ?> minutos.
+	<br /><br />
+	<label>texto:</label><?php echo $this->Form->input('Agenda.texto',array('label'=>false,'div'=>null,'type'=>'text')) ?>
+	<br />
+	<?php echo $this->Form->input('Agenda._id',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>
+	<?php echo $this->Form->input('Agenda.dia',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>
+	<?php echo $this->Form->input('Agenda.mes',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>
+	<?php echo $this->Form->input('Agenda.ano',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>
+	</div>
+	<div id='evBotoes'>
+		<input type='submit' name='evSalvar' value='Salvar Evento' id='evSalvar' />
+	</div>
+	</form>
 </div>

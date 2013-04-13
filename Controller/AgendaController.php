@@ -28,6 +28,14 @@ class AgendaController extends AppController {
 		if (!$mes) $mes = date('m');
 		if (!$ano) $ano = date('Y');
 
+		// configurando horas
+		$horas = array();
+		for($i=0; $i<24; $i++) $horas[$i] = $i;
+		
+		// configurando minutos
+		$minutos = array();
+		for($i=0; $i<13; $i++) $minutos[($i*5)] = ($i*5);
+
 		// configurando mês e anos vizinhos
 		$mesA = $mes-1;
 		$anoA = $ano;
@@ -50,27 +58,109 @@ class AgendaController extends AppController {
 		// configurando meses e anos
 		$meses 	= array();
 		$anos	= array();
-		for($i=1; $i<13; $i++) $meses[$i] = $i;
-		for($i=date('Y')-20; $i<date('Y')+30; $i++) $anos[$i] = $i;
+		//for($i=1; $i<13; $i++) $meses[$i] = $i;
+		for($i=date('Y')-20; $i<date('Y')+10; $i++) $anos[$i] = $i;
+		$meses['1'] = 'Janeiro';
+		$meses['2'] = 'Fevereiro';
+		$meses['3'] = 'Março';
+		$meses['4'] = 'Abril';
+		$meses['5'] = 'Maio';
+		$meses['6'] = 'Junho';
+		$meses['7'] = 'Julho';
+		$meses['8'] = 'Agosto';
+		$meses['9'] = 'Setembro';
+		$meses['10'] = 'Outubro';
+		$meses['11'] = 'Novembro';
+		$meses['12'] = 'Dezembro';
 		
 		// configurando o primeiro dia do mês
 		$prDiaSem = date('w', strtotime("$ano/$mes/1"));
 		
 		// configurando os dias do quadro
-		$calendario = $this->getCalendario($mes,$ano);
+		$_calendario = $this->getCalendario($mes,$ano);
 
 		// configurando o primeiro e o último dia do mẽs corrente
 		$hora_pri = mktime(0,0,0,$mes,1,$ano);
-		$hora_ult = mktime(0,0,0,$mes,date('t', $hora_pri),$ano);
+		$hora_ult = mktime(23,59,59,$mes,date('t', $hora_pri),$ano);
 
 		// recuperando as mensagens do mês e ano
 		$opc = array();
 		$opc['conditions']['Agenda.data_txt'] 	= array('$gte'=>$hora_pri,'$lte'=>$hora_ult);
 		$opc['order']['Agenda.data_txt'] 		= 'asc';
 		$this->data = $this->Agenda->find('all',$opc);
+		
+		// concatenando calendário com dados lançado
+		$calendario = array();
+		$lc			= 0;
+		foreach($_calendario as $_idS => $_arrDias)
+		{
+			foreach($_arrDias as $_idN => $_dia)
+			{
+				$calendario[$_idS][$_idN]['dia'] 	= $_dia;
+				$calendario[$_idS][$_idN]['msgs'] 	= array();
+				if (!empty($this->data))
+				{
+					$lc	= 0;
+					foreach($this->data as $_l => $_arrMods)
+					{
+						$dia = (int) substr($_arrMods['Agenda']['data_txt'],0,2);
+						if ($_dia==$dia)
+						{
+							$calendario[$_idS][$_idN]['msgs'][$lc]['id'] 	= $_arrMods['Agenda']['_id'];
+							$calendario[$_idS][$_idN]['msgs'][$lc]['texto'] = $_arrMods['Agenda']['texto'];
+							$calendario[$_idS][$_idN]['msgs'][$lc]['hora'] 	= substr($_arrMods['Agenda']['data_txt'],11,5);
+							$lc++;
+						}
+					}
+				}
+			}
+		}
 
 		// atualizando a view
-		$this->set(compact('meses','anos','dia','mes','ano','linkA','linkP','linkH','prDiaSem','calendario'));
+		$this->set(compact('meses','anos','dia','mes','ano','linkA','linkP','linkH','prDiaSem','calendario','horas','minutos'));
+	}
+
+	/**
+	 * Salva o formulário postado no documento
+	 * 
+	 * @return	void
+	 */
+	public function salvar_evento()
+	{
+		$this->layout 	= 'ajax';
+		$msg			= '';
+		// se o form foi postado
+		if ($this->request->isPost())
+		{
+			unset($this->request->data['evSalvar']);
+			$data = $this->data['Agenda'];
+			$data['dia']= '00'.trim($data['dia']);
+			$data['dia'] = substr($data['dia'],strlen($data['dia'])-2,2);
+
+			$data['mes']= '00'.trim($data['mes']);
+			$data['mes'] = substr($data['mes'],strlen($data['mes'])-2,2);
+
+			$data['hora']= '00'.trim($data['hora']);
+			$data['hora'] = substr($data['hora'],strlen($data['hora'])-2,2);
+
+			$data['minu']= '00'.trim($data['minu']);
+			$data['minu'] = substr($data['minu'],strlen($data['minu'])-2,2);
+
+			$dataEv = $data['dia'].'/'.$data['mes'].'/'.$data['ano'].' '.$data['hora'].':'.$data['minu'].':'.date('s');
+			$this->request->data = array();
+			$this->request->data['0']['Agenda']['_id'] 		= isset($data['_id']) ? $data['_id'] : 0;
+			$this->request->data['0']['Agenda']['texto'] 	= isset($data['texto']) ? $data['texto'] : '';
+			$this->request->data['0']['Agenda']['data_txt']	= $dataEv;
+			if (!$this->Agenda->saveAll($this->data))
+			{
+				$this->Session->setFlash('Não foi possível salvar o evento !!!','default',array('class'=>'msgErro'));
+			} else
+			{
+				$this->Session->setFlash('O Evento foi salvo com sucesso !!!','default',array('class'=>'msgOk'));
+			}
+			$this->redirect('index/'.$data['mes'].'/'.$data['ano']);
+		}
+		$this->set(compact('msg'));
 	}
 
 	/**
