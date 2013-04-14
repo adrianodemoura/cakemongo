@@ -17,6 +17,24 @@ class AgendaController extends AppController {
 	public $uses = array('Agenda');
 
 	/**
+	 * 
+	 */
+	public function beforeRender()
+	{
+		parent::beforeRender();	
+		// re-configurando minutos
+		$minutos = array();
+		$a = 0;
+		for($i=0; $i<12; $i++)
+		{
+			$a = $i*5;
+			if (strlen($a)==1) $a = '0'.$a;
+			$minutos[$a] = $a;
+		}
+		$this->viewVars['minutos'] = $minutos;
+	}
+
+	/**
 	 * Exibe a página inicial do cadastro de Agenda
 	 * 
 	 * @return	void
@@ -27,14 +45,6 @@ class AgendaController extends AppController {
 		$dia 	= date('d');
 		if (!$mes) $mes = date('m');
 		if (!$ano) $ano = date('Y');
-
-		// configurando horas
-		$horas = array();
-		for($i=0; $i<24; $i++) $horas[$i] = $i;
-		
-		// configurando minutos
-		$minutos = array();
-		for($i=0; $i<13; $i++) $minutos[($i*5)] = ($i*5);
 
 		// configurando mês e anos vizinhos
 		$mesA = $mes-1;
@@ -54,24 +64,6 @@ class AgendaController extends AppController {
 		$linkA = Router::url('/',true).'agenda/index/'.$mesA.'/'.$anoA;
 		$linkH = Router::url('/',true).'agenda/index/'.date('m').'/'.date('Y');
 		$linkP = Router::url('/',true).'agenda/index/'.$mesP.'/'.$anoP;
-
-		// configurando meses e anos
-		$meses 	= array();
-		$anos	= array();
-		//for($i=1; $i<13; $i++) $meses[$i] = $i;
-		for($i=date('Y')-20; $i<date('Y')+10; $i++) $anos[$i] = $i;
-		$meses['1'] = 'Janeiro';
-		$meses['2'] = 'Fevereiro';
-		$meses['3'] = 'Março';
-		$meses['4'] = 'Abril';
-		$meses['5'] = 'Maio';
-		$meses['6'] = 'Junho';
-		$meses['7'] = 'Julho';
-		$meses['8'] = 'Agosto';
-		$meses['9'] = 'Setembro';
-		$meses['10'] = 'Outubro';
-		$meses['11'] = 'Novembro';
-		$meses['12'] = 'Dezembro';
 		
 		// configurando o primeiro dia do mês
 		$prDiaSem = date('w', strtotime("$ano/$mes/1"));

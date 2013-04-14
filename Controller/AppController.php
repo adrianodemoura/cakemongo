@@ -215,6 +215,43 @@ class AppController extends Controller {
 		
 		// título da página
 		if (!isset($this->viewVars['titulo'])) $this->viewVars['titulo'] = $this->name;
+		
+		// configurando dias, meses, anos, horas e minutos
+		$dias	= array();
+		$meses 	= array();
+		$anos	= array();
+		$horas	= array();
+		$minutos= array();
+		for($i=date('Y')-90; $i<date('Y')+10; $i++) $anos[$i] = $i;
+		$meses['01'] = 'Janeiro';
+		$meses['02'] = 'Fevereiro';
+		$meses['03'] = 'Março';
+		$meses['04'] = 'Abril';
+		$meses['05'] = 'Maio';
+		$meses['06'] = 'Junho';
+		$meses['07'] = 'Julho';
+		$meses['08'] = 'Agosto';
+		$meses['09'] = 'Setembro';
+		$meses['10'] = 'Outubro';
+		$meses['11'] = 'Novembro';
+		$meses['12'] = 'Dezembro';
+		for($i=1; $i<32; $i++)
+		{
+			if (strlen($i)==1) $i = '0'.$i;
+			$dias[$i] = $i;
+		}
+		for($i=0; $i<24; $i++)
+		{
+			if (strlen($i)==1) $i = '0'.$i;
+			$horas[$i] = $i;
+		}
+		for($i=0; $i<60; $i++)
+		{
+			if (strlen($i)==1) $i = '0'.$i;
+			$minutos[$i] = $i;
+		}
+		
+		$this->set(compact('horas','minutos','meses','anos','dias'));
 	}
 
 	/**
@@ -392,6 +429,9 @@ class AppController extends Controller {
 			{
 				$this->Session->setFlash('O Registro foi salvo com sucesso !!!','default',array('class'=>'msgOk'));
 				$this->redirect('editar/'.$this->$modelClass->id);
+			} else
+			{
+				debug($this->data);die('Contact o administrador do sistema');
 			}
 		} catch (MongoException $e) 
 		{

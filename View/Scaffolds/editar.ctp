@@ -142,7 +142,34 @@
 			if (isset($soLeitura)) $p['input']['readonly'] = 'readonly';
 	
 			// escrevendo o input padrão do registro
-			echo $this->Form->input($a['0'].'.'.$a['1'],$p['input']);
+			if (isset($p['tipo']) && in_array($p['tipo'],array('data','datatempo')) && !isset($p['input']['readonly']))
+			{
+				$vlr = $this->data[$a['0']][$a['1']];
+				$p['input']['type'] 	= 'select';
+				$p['input']['options'] 	= $dias;
+				$p['input']['value'] 	= substr($vlr,0,2);
+				echo $this->Form->input($a['0'].'.'.$a['1'].'.dia',$p['input']);
+
+				$p['input']['label'] 	= false;
+				$p['input']['options'] 	= $meses;
+				$p['input']['value'] 	= substr($vlr,3,2);
+				echo $this->Form->input($a['0'].'.'.$a['1'].'.mes',$p['input']);
+
+				$p['input']['value'] 	= substr($vlr,6,4);
+				$p['input']['options'] 	= $anos;
+				echo $this->Form->input($a['0'].'.'.$a['1'].'.ano',$p['input']);
+				
+				if ($p['tipo']=='datatempo')
+				{
+					$p['input']['value'] 	= substr($vlr,11,2);
+					$p['input']['options'] 	= $horas;
+					echo $this->Form->input($a['0'].'.'.$a['1'].'.hora',$p['input']);
+					
+					$p['input']['value'] 	= substr($vlr,14,2);
+					$p['input']['options'] 	= $minutos;
+					echo $this->Form->input($a['0'].'.'.$a['1'].'.minu',$p['input']);
+				}
+			} else echo $this->Form->input($a['0'].'.'.$a['1'],$p['input']);
 			
 			// criando divReposta do campo para busca ajax
 			if (!empty($o) && !isset($p['input']['readonly']))
