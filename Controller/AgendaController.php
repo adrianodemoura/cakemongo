@@ -41,7 +41,7 @@ class AgendaController extends AppController {
 	 * 
 	 * @return	void
 	 */
-	public function index($mes=0,$ano=0)
+	public function index($mes=0,$ano=0,$idEvento=0)
 	{
 		// configurando primeiro dia, mês e ano
 		$dia 	= date('d');
@@ -111,7 +111,7 @@ class AgendaController extends AppController {
 		}
 
 		// atualizando a view
-		$this->set(compact('meses','anos','dia','mes','ano','linkA','linkP','linkH','prDiaSem','calendario','horas','minutos'));
+		$this->set(compact('meses','anos','dia','mes','ano','linkA','linkP','linkH','prDiaSem','calendario','horas','minutos','idEvento'));
 	}
 
 	/**
@@ -153,7 +153,10 @@ class AgendaController extends AppController {
 			{
 				$this->Session->setFlash('O Evento foi salvo com sucesso !!!','default',array('class'=>'msgOk'));
 			}
-			$this->redirect('index/'.$data['mes'].'/'.$data['ano']);
+			$id = isset($this->Agenda->id) ? $this->Agenda->id : null;
+			$re = 'index/'.$data['mes'].'/'.$data['ano'];
+			if ($id) $re .= '/'.$id;
+			$this->redirect($re);
 		}
 
 		// se o form foi postado para excluir

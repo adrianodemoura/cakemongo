@@ -223,6 +223,11 @@
 		background-color: #eee;
 		cursor: pointer;
 	}
+	#evMsg
+	{
+		text-align: center;
+		color: green;
+	}
 </style>
 
 <div id='agenda' class='agenda'>
@@ -260,11 +265,12 @@
 
 		<?php if (isset($_arrProp['msgs']['0']['hora'])) : ?>
 			<?php foreach($_arrProp['msgs'] as $_l => $_arrCmps) : $id = $_arrCmps['id'].$_arrProp['dia']; ?>
+			<?php if (isset($idEvento) && strtolower($idEvento)==$_arrCmps['id']) $this->viewVars['onRead'] .= "\t".'setEvento("'.$id.'")'."\n"; ?>
 			<div id='celula<?= $id ?>'>
 				<div class='agId' id='<?= $id.'id' ?>'><?= $_arrCmps['id'] ?></div>
 				<a title='<?= $_arrCmps["evento"] ?>' class='celulaA' href='' onclick="return setEvento('<?= $id ?>');">
 				<div class='agHora' id='<?= $id.'hora' ?>'><?= $_arrCmps['hora'] ?></div>
-				<?= substr($_arrCmps['evento'],0,10).' ...' ?>
+				<?= substr($_arrCmps['evento'],0,15).' ...' ?>
 				<div class='agEvento' id='<?= $id.'evento' ?>'><?= $_arrCmps['evento'] ?></div>
 				</a>
 			</div>
@@ -307,6 +313,11 @@
 	<div id='evBotoes'>
 		<input type='submit' name='evSalvar' value='Salvar Evento' id='evSalvar' />
 		<input type='submit' name='evExcluir' value='Excluir Evento' id='evExcluir' />
+	</div>
+	<div id='evMsg'>
+		<?php if ($this->Session->read('Message.flash.message')>'' && !empty($idEvento)) : ?>
+		O Evento foi salvo com sucesso ...
+		<?php endif; $this->viewVars['onRead'] .= "\t".'setTimeout(function(){ $("#evMsg").fadeOut(4000); },3000);'."\n"; ?>
 	</div>
 	</form>
 </div>
