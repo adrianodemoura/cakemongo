@@ -26,6 +26,11 @@
 		href='<?= $this->base.'/'.strtolower($this->name) ?>/editar/0'>
 	<img src='<?= $this->base ?>/img/bt_novo.png' />
 	</a>
+	<?php if (isset($botoes)) : foreach($botoes as $_tit => $_arrProp) : ?>
+	<br /><br /><a title='<?= isset($_arrProp['title']) ? $_arrProp['title'] : null ?>' href='<?= $_arrProp['url'] ?>'>
+	<img src='<?= $_arrProp['img'] ?>' width=30 />
+	</a>
+	<?php endforeach; endif ?>
 </div>
 <?php endif ?>
 

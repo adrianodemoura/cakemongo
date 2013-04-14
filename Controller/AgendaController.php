@@ -17,7 +17,9 @@ class AgendaController extends AppController {
 	public $uses = array('Agenda');
 
 	/**
+	 * Executa código antes da renderização da view
 	 * 
+	 * @return	void
 	 */
 	public function beforeRender()
 	{
@@ -169,6 +171,17 @@ class AgendaController extends AppController {
 		}
 
 		$this->set(compact('msg'));
+	}
+
+	/**
+	 * 
+	 */
+	public function listar()
+	{
+		parent::listar();
+		$this->viewVars['botoes']['Index']['url'] = Router::url('/',true).'agenda/index';
+		$this->viewVars['botoes']['Index']['img'] = Router::url('/',true).'img/logo_agendas.png';
+		$this->viewVars['botoes']['Index']['title'] = 'Clique aqui para acessar a agenda completa ...';
 	}
 
 	/**
