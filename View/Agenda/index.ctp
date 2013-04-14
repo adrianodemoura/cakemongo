@@ -296,7 +296,7 @@
 </div>
 <div id='evento'>
 	<form id='formEvento' name='formEvento' method='post' action='<?= Router::url('/',true) ?>agenda/salvar_evento'>
-	<span id='evFechar'><a href='#' onclick='$("#evento").hide(); $("#tampa").hide(); return false;'>[x] Fechar&nbsp;&nbsp;</a></span>
+	<span id='evFechar'><a href='#' onclick='$("#evento").hide(); $("#tampa").hide(); $("#evMsg").hide(); return false;'>[x] Fechar&nbsp;&nbsp;</a></span>
 	<div id='evCampos'>
 	<label>Quando:</label>
 	<span id='evMesAno'></span>
