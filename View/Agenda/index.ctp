@@ -310,10 +310,12 @@
 	<?php echo $this->Form->input('Agenda.mes',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>
 	<?php echo $this->Form->input('Agenda.ano',array('label'=>false,'div'=>null,'type'=>'hidden')) ?>
 	</div>
+	<?php if ($this->Html->getLink('/'.strtolower($this->name).'/salvar_evento') ) : ?>
 	<div id='evBotoes'>
 		<input type='submit' name='evSalvar' value='Salvar Evento' id='evSalvar' />
 		<input type='submit' name='evExcluir' value='Excluir Evento' id='evExcluir' />
 	</div>
+	<?php endif ?>
 	<div id='evMsg'>
 		<?php if ($this->Session->read('Message.flash.message')>'' && !empty($idEvento)) : ?>
 		O Evento foi salvo com sucesso ...
