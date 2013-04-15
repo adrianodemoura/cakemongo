@@ -9,21 +9,13 @@ Memcached vrs. 1.4 (opcional)
 
 Coloque este código fonte no seu servidor web, algo como /var/www/cakemongo
 
-Acesse http://localhost/cakemongo, e seguia a instruções que são basicamente:
+Acesse http://localhost/cakemongo, e sigua as instruções de instalação, que são basicamente:
 
-Edite o arquivo APP/Config/core.php, e mude a linha:
+- Criar o banco de dados, com usuário e senha
+- Criar o perfil "ADMINISTRADOR"
+- Criar o usuário administrador com a senha "debian67"
 
-Configure::write('login0800',false);
+Recomendamos ainda que execute a importação do Cadastro de Cidades, acessando Ferramentas/Importar CSV
 
-para
-
-Configure::write('login0800',true);
-
-Desta forma não será necessário login para acessar o sistema, então será possível
-criar o usuário administrador bem como os perfis de usuários que o sistema deve possuir.
-
-Depois do usuário administrador e perfis criados, edita novamente o arquivo APP/Config/core.php e 
-altere "login0800" para false. 
-
-Execute log-off e diverta-se.
+Execute o login e divirtasse.
 

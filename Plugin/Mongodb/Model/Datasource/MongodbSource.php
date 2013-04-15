@@ -213,21 +213,17 @@ class MongodbSource extends DboSource {
 			
 			> use ".$this->config['database']."
 			> db.addUser('".$this->config['login']."','".$this->config['password']."')
-
+			> db.perfis.insert( {'nome':'ADMINISTRADOR'} )
+			> db.usuarios.insert({'nome':'ADMINISTRADOR ".Configure::read('sistema')."','login':'admin',
+			'senha':'300ca1faadfec17c5e7e55f5c9fe3213f8054d76','ativo':true,
+			'perfil':'ADMINISTRADOR','criado':".strtotime(date('Y/m/d H:i:s'))."})
 			
-			Depois de criar o usu&aacute;rio Administrador, n&atilde;o esque&ccedil;a de editar o arquivo
-			
-			APP/Config/core.php e mudar:
-			
-			Configure::write('login0800',true);
-			
-			para
-			
-			Configure::write('login0800',false);
+			A senha do usu&aacute;rio admin &eacute; <b>debian67</b>
 			
 			Clique <a href=''>aqui</a> para tentar novamente.
+
 			
-			</pre>";
+			";
 			
 			
 			die();

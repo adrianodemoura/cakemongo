@@ -98,7 +98,7 @@ class AppModel extends Model {
 				foreach($_arrCmps as $_cmp => $_vlr)
 				{
 					$tipo = isset($this->schema[$_cmp]['tipo']) ? $this->schema[$_cmp]['tipo'] : null;
-					if (in_array($tipo,array('data','datatempo')))
+					if (is_array($_vlr) && in_array($tipo,array('data','datatempo')))
 					{
 						$this->data[$_mod][$_cmp] = $_vlr['dia'].'/'.$_vlr['mes'].'/'.$_vlr['ano'];
 						if (isset($_vlr['hora']))
