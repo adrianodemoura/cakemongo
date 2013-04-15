@@ -37,7 +37,7 @@
 	$this->viewVars['edicaoCampos'] = isset($this->viewVars['edicaoCampos']) ? $this->viewVars['edicaoCampos'] : array();
 	if (empty($id)) // removendo criado e modificado na inclusão
 	{
-		if (in_array($modelClass.'.modificado',$this->viewVars['edicaoCampos']))
+		if (in_array($modelClass.'.criado',$this->viewVars['edicaoCampos']))
 		{
 			unset($this->viewVars['edicaoCampos'][array_search($modelClass.'.criado',$this->viewVars['edicaoCampos'])]);
 			unset($this->viewVars['edicaoCampos'][array_search($modelClass.'.modificado',$this->viewVars['edicaoCampos'])]);
@@ -46,6 +46,16 @@
 			{
 				unset($this->viewVars['edicaoCampos'][$ul-1]);
 			}
+			echo 'oi';
+		}
+	}
+
+	// se o campo modificado está vazio, carca fora do campos de edição
+	if ($this->viewVars['edicaoCampos'][array_search($modelClass.'.modificado',$this->viewVars['edicaoCampos'])])
+	{
+		if (isset($schema['modificado']) && !isset($this->data[$modelClass]['modificado']))
+		{
+			unset($this->viewVars['edicaoCampos'][array_search($modelClass.'.modificado',$this->viewVars['edicaoCampos'])]);
 		}
 	}
 

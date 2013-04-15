@@ -145,6 +145,7 @@ class Usuario extends AppModel {
 		),
 		'modificado'	=> array
 		(	'type' 		=> 'integer',
+			'index'		=> true,
 			'tipo'		=> 'datatempo',
 			'input'		=> array('label'=>'Modificado')
 		),

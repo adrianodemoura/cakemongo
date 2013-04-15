@@ -228,9 +228,22 @@
 		text-align: center;
 		color: green;
 	}
+	#agenda #botoes
+	{
+		float: left;
+		margin: 40px 10px 5px 5px;
+	}
 </style>
 
 <div id='agenda' class='agenda'>
+	
+<div id='botoes'>
+	<?php if ($this->Html->getLink('/agenda/listar') ) : ?>
+	<a href='<?= Router::url('/',true).'agenda/listar' ?>' title='Clique aqui para acessar o modo lista'>
+		<img src='<?= Router::url('/',true) ?>img/lista.png' />
+	</a>
+	<?php endif ?>
+</div>
 
 <div class='navAgenda'>
 	<ul>

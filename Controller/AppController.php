@@ -431,7 +431,7 @@ class AppController extends Controller {
 				$this->redirect('editar/'.$this->$modelClass->id);
 			} else
 			{
-				debug($this->data);die('Contact o administrador do sistema');
+				//debug($this->data);die('Contact o administrador do sistema');
 			}
 		} catch (MongoException $e) 
 		{
