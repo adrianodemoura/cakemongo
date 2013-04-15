@@ -429,9 +429,6 @@ class AppController extends Controller {
 			{
 				$this->Session->setFlash('O Registro foi salvo com sucesso !!!','default',array('class'=>'msgOk'));
 				$this->redirect('editar/'.$this->$modelClass->id);
-			} else
-			{
-				//debug($this->data);die('Contact o administrador do sistema');
 			}
 		} catch (MongoException $e) 
 		{
