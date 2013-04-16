@@ -206,26 +206,22 @@ class MongodbSource extends DboSource {
 		} catch(MongoException $e) {
 			$this->error = $e->getMessage();
 			trigger_error($this->error);
-			echo "<pre>
-			
+			echo "
+			<pre>
+
 			
 			Pe&ccedil;a ao Administrador do mongoDB para executar:
-			
+
 			use ".$this->config['database']."
 			db.addUser('".$this->config['login']."','".$this->config['password']."')
 			db.perfis.insert( {'nome':'ADMINISTRADOR'} )
 			db.usuarios.insert({'nome':'ADMINISTRADOR ".Configure::read('sistema')."','login':'admin',
-			'senha':'300ca1faadfec17c5e7e55f5c9fe3213f8054d76','ativo':true,
+			'senha':'4e01e9f12f9de5c7768cc9dae53cf8b09bcc2331','ativo':true,
 			'perfil':'ADMINISTRADOR','criado':".strtotime(date('Y/m/d H:i:s'))."})
 			
-			A senha do usu&aacute;rio admin &eacute; <b>debian67</b>
+			A senha do usu&aacute;rio <b>admin</b> &eacute; <b>admin67</b>
 			
-			Clique <a href=''>aqui</a> para tentar novamente.
-
-			
-			";
-			
-			
+			Clique <a href=''>aqui</a> para tentar novamente.";
 			die();
 		}
 		return $this->connected;

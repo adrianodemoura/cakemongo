@@ -173,22 +173,26 @@ class FerramentasController extends AppController {
 	 * 
 	 * @param	integer	$tot	Total de documentos
 	 */
-	public function popular($tota=0)
+	public function popular()
 	{
-		$tota = isset($this->data['Popular']['total']) ? $this->data['Popular']['total'] : $tota;
-		if (!empty($tota) && !$this->Session->check('Popula.total'))
+		$tota = isset($this->data['Popular']['total']) ? $this->data['Popular']['total'] : 0;
+		if (!empty($tota))
 		{
-			$arrPop['total'] = $tota;
-			$arrPop['Model'] = isset($this->data['Popular']['model']) ? $this->data['Popular']['model'] : null;
-			$arrPop['loop']  = isset($this->data['Popular']['loop'])  ? $this->data['Popular']['loop']  : 0;
-			$this->Session->write('Popula',$arrProp);
+			$arrProp 			= array();
+			$arrProp['total'] 	= $tota;
+			$arrProp['Model'] 	= isset($this->data['Popular']['model']) ? $this->data['Popular']['model'] : null;
+			$arrProp['loop']  	= isset($this->data['Popular']['loop'])  ? $this->data['Popular']['loop']  : 0;
+			$this->Session->write('Popular',$arrProp);
 		}
-		
-		if ($this->Session->check('Popula.total'))
+
+		if ($this->Session->check('Popular.total'))
 		{
-			$feito = $this->Session->check('Popula.feito') ? $this->Session->check('Popula.feito') : 0;
-			$aFazer= ($this->Session->check('Popula.total') / $this->Session->check('Popula.loop') ) - $feito;
+			$aFazer= ($this->Session->read('Popular.total') / $this->Session->read('Popular.loop'))-$this->Session->check('Popular.feito');
 			
+			// executo a fazer
+			
+			$this->Session->write('Popular.feito',$this->Session->read('Popular.total')-$aFazer);
+			$this->Session->write('Popular.total',$this->Session->read('Popular.total')-$aFazer);
 		}
 	}
 }
