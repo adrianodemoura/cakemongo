@@ -167,4 +167,28 @@ class FerramentasController extends AppController {
 			$this->Session->write('csv.Loop',$loop);
 		} else $msg = 'não foi possivel localizar '.$arq;
 	}
+
+	/**
+	 * Popula o Model
+	 * 
+	 * @param	integer	$tot	Total de documentos
+	 */
+	public function popular($tota=0)
+	{
+		$tota = isset($this->data['Popular']['total']) ? $this->data['Popular']['total'] : $tota;
+		if (!empty($tota) && !$this->Session->check('Popula.total'))
+		{
+			$arrPop['total'] = $tota;
+			$arrPop['Model'] = isset($this->data['Popular']['model']) ? $this->data['Popular']['model'] : null;
+			$arrPop['loop']  = isset($this->data['Popular']['loop'])  ? $this->data['Popular']['loop']  : 0;
+			$this->Session->write('Popula',$arrProp);
+		}
+		
+		if ($this->Session->check('Popula.total'))
+		{
+			$feito = $this->Session->check('Popula.feito') ? $this->Session->check('Popula.feito') : 0;
+			$aFazer= ($this->Session->check('Popula.total') / $this->Session->check('Popula.loop') ) - $feito;
+			
+		}
+	}
 }

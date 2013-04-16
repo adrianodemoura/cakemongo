@@ -35,6 +35,7 @@
 			<ul class='col2'>
 				<?php echo $this->Html->getLinkLI('/ferramentas/limpar_cache','Limpar o cache'); ?>
 				<?php echo $this->Html->getLinkLI('/ferramentas/importar_csv','Importar CSV'); ?>
+				<?php echo $this->Html->getLinkLI('/ferramentas/popular','Popular Coleção'); ?>
 			</ul>
 		</li>
 		<li><a href=''>Ajuda</a>
