@@ -1,4 +1,9 @@
-<?php ?>
+<?php
+	if ($this->Session->check('Popular'))
+	{
+		$this->viewVars['onRead'] .= "\t".'setTimeout(function(){ document.location.href="'.$this->here.'" },1000);'."\t";
+	}
+?>
 <script>
 	function validaForm()
 	{
@@ -23,10 +28,25 @@
 		margin: 50px auto;
 		width: 600px;
 	}
+	label
+	{
+		display: block;
+		float: left;
+		width: 150px;
+		text-align: right;
+		margin: 0px 5px 0px 0px;
+		line-height: 24px;
+		background-color: #ddd;
+	}
+	.divLabel
+	{
+		height: 30px;
+		line-height: 24px;
+	}
 </style>
 
 <div id='popular'>
-	<?php if (!$this->Session->read('Popular')) : ?>
+	<?php if (!$arrProp || empty($arrProp)) : ?>
 	<?php echo $this->Form->create('Popular', array('onsubmit'=>'return validaForm();','name'=>'ImportaCsv','id'=>'ImportaCsv','type' => 'file')); ?>
 	<?php
 		echo $this->Form->input('model', 	array('label'=>'* Model a ser populado: ','div'=>array('class'=>'model'),'type' => 'text')).'<br />';
@@ -35,9 +55,17 @@
 	?>
 	<?php echo $this->Form->end('Enviar');  ?>
 	<?php else : ?>
-	<?php
-		debug($this->Session->read('Popular'));
-		debug($this->Session->read('Popular.feito'));
-	?>
+	<div class='divLabel'><label>Model: </label><?= $arrProp['Model'] ?></div>
+	<div class='divLabel'><label>Total: </label><?= $arrProp['total'] ?></div>
+	<div class='divLabel'><label>Loop: </label><?= $arrProp['loop'] ?></div>
+	<div class='divLabel'><label>Feito: </label><?= $arrProp['feito'] ?></div>
+	<br />
+	<div class='divLabel'><label>Início: </label><?= date('d/m/Y H:i:s',$arrProp['inicio']) ?></div>
+	<?php if (isset($arrProp['fim'])) : ?>
+	<div class='divLabel'><label>Fim: </label><?= date('d/m/Y H:i:s',$arrProp['fim']) ?></div>
+	<div class='divLabel'><label>Tempo Corrido: </label><?= date('i:s',$arrProp['fim']-$arrProp['inicio']) ?></div>
+	<?php endif ?>
+	
 	<?php endif ?>
 </div>
+

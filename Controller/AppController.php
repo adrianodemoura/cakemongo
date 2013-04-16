@@ -366,7 +366,6 @@ class AppController extends Controller {
 		// ordem
 		$ordem = $this->Session->read('listar.'.$chave.'.ordem');
 
-
 		if ($id)
 		{
 			// recuperando o primeiro e último
