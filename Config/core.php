@@ -24,7 +24,8 @@
 	/**
 	 * Acesso sem login ?
 	 * 
-	 * Limberando acesso total para testes de stress
+	 * Recomendável usar para testes de stress.
+	 * O Usuário logado será o administrador.
 	 */
 	Configure::write('login0800',false);
 
