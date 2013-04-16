@@ -46,12 +46,11 @@
 			{
 				unset($this->viewVars['edicaoCampos'][$ul-1]);
 			}
-			echo 'oi';
 		}
 	}
 
 	// se o campo modificado está vazio, carca fora do campos de edição
-	if ($this->viewVars['edicaoCampos'][array_search($modelClass.'.modificado',$this->viewVars['edicaoCampos'])])
+	if (array_search($modelClass.'.modificado',$this->viewVars['edicaoCampos']) && $this->viewVars['edicaoCampos'][array_search($modelClass.'.modificado',$this->viewVars['edicaoCampos'])])
 	{
 		if (isset($schema['modificado']) && !isset($this->data[$modelClass]['modificado']))
 		{
@@ -61,7 +60,6 @@
 
 	// primeiro focu
 	if (isset($focus)) $this->viewVars['onRead'] .= "\t".'$("#'.$this->Form->domId($focus).'").focus();'."\n";
-
 ?>
 
 <div class='barra'>
@@ -210,6 +208,7 @@
 <?php
 	if(isset($this->validationErrors))
 	{
+		rsort($this->validationErrors);
 		foreach($this->validationErrors as $_mod => $_arrCmps)
 		{
 			foreach($_arrCmps as $_cmp => $_erro)

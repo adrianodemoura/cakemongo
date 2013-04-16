@@ -211,10 +211,10 @@ class MongodbSource extends DboSource {
 			
 			Pe&ccedil;a ao Administrador do mongoDB para executar:
 			
-			> use ".$this->config['database']."
-			> db.addUser('".$this->config['login']."','".$this->config['password']."')
-			> db.perfis.insert( {'nome':'ADMINISTRADOR'} )
-			> db.usuarios.insert({'nome':'ADMINISTRADOR ".Configure::read('sistema')."','login':'admin',
+			use ".$this->config['database']."
+			db.addUser('".$this->config['login']."','".$this->config['password']."')
+			db.perfis.insert( {'nome':'ADMINISTRADOR'} )
+			db.usuarios.insert({'nome':'ADMINISTRADOR ".Configure::read('sistema')."','login':'admin',
 			'senha':'300ca1faadfec17c5e7e55f5c9fe3213f8054d76','ativo':true,
 			'perfil':'ADMINISTRADOR','criado':".strtotime(date('Y/m/d H:i:s'))."})
 			
