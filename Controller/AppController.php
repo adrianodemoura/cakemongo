@@ -545,6 +545,7 @@ class AppController extends Controller {
 			$opc['conditions'][$modelClass.'.'.$campo] = (float) $texto;
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';
 		$opc['limit'] 	= 100;
+		$opc['fields'] = array($modelClass.'._id',$modelClass.'.'.$campo);
 
 		$pesquisa 		= $this->$modelClass->find('list',$opc);
 		$this->set(compact('url','pesquisa'));
