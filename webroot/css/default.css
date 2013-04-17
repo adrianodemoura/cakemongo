@@ -91,6 +91,7 @@ body
 	margin: 10px auto;
 	border-bottom: 1px solid #ccc;
 	border-right: 1px solid #ccc;
+	bottom: 1px;
 }
 .cake-sql-log th
 {
@@ -199,8 +200,8 @@ body
 
 #pesquisa
 {
-	float: right;
-	right: 10px;
+	float: left;
+	left: 300px;
 	position: absolute;
 }
 
@@ -236,7 +237,7 @@ body
 #paginacao_lista
 {
 	float: left;
-	margin: 5px 0px 0px 10px;
+	margin: 5px 0px 5px 60px;
 	/*background-color: #ddd;*/
 	min-width: 200px;
 	height: 28px;

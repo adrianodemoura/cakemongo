@@ -1,15 +1,14 @@
 #novo
 {
 	position: absolute;
-	margin: 30px 0px 0px 20px;
+	margin: 80px 0px 0px 20px;
 }
 
 .tabLista
 {
 	border-right: 1px solid #bbb;
 	border-top: 1px solid #bbb;
-	margin: 0px 0px 0px 60px;
-	clear: both;
+	margin: 0px 0px 5px 60px;
 }
 
 .tabLista tr th,

@@ -34,11 +34,11 @@
 </div>
 <?php endif ?>
 
-<?php echo $this->element('abas'); ?>
-
 <?php echo $this->element('paginacao_lista'); ?>
 
 <?php echo $this->element('pesquisa'); ?>
+
+<?php echo $this->element('abas'); ?>
 
 <table cellspacing='0' cellpadding='0' class='tabLista'>
 <?php foreach($this->data as $_l => $_arrMods) : $id = $_arrMods[$modelClass]['_id']; ?>
