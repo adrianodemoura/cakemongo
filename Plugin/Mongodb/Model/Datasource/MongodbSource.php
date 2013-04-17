@@ -218,6 +218,18 @@ class MongodbSource extends DboSource {
 			db.usuarios.insert({'nome':'ADMINISTRADOR ".Configure::read('sistema')."','login':'admin',
 			'senha':'4e01e9f12f9de5c7768cc9dae53cf8b09bcc2331','ativo':true,
 			'perfil':'ADMINISTRADOR','criado':".strtotime(date('Y/m/d H:i:s'))."})
+
+			db.acessos.createIndex({login:1})
+			db.cidades.createIndex({nome:1})
+			db.cidades.createIndex({uf:1})
+			db.agendas.createIndex({evento:1})
+			db.agendas.createIndex({data_txt:1})
+			db.usuarios.createIndex({login:1})
+			db.usuarios.createIndex({modificado:1})
+			db.usuarios.createIndex({nome:1})
+			db.perfis.createIndex({nome:1})
+			db.avisos.createIndex({texto:1})
+			db.avisos.createIndex({modificado:1})
 			
 			A senha do usu&aacute;rio <b>admin</b> &eacute; <b>admin67</b>
 			

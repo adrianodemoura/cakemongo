@@ -1,3 +1,4 @@
 
 db.acessos.createIndex({login:1})
 db.cidades.createIndex({nome:1,uf:1})
+db.agendas.createIndex({evento:1,data_txt:1})

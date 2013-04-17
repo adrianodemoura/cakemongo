@@ -46,12 +46,12 @@
 <style>
 	.agenda
 	{
-		margin: 10px auto;
-		width: 1000px;
+		/*margin: 10px auto;*/
+		width: 1200px;
 	}
 	.navAgenda
 	{
-		margin: 0px 0px 5px 10px;
+		margin: 0px 0px 5px 5px;
 	}
 	.navAgenda ul
 	{
@@ -101,6 +101,13 @@
 	{
 		float: left;
 	}
+	.tabAgenda tr td > div
+	{
+		overflow-y: scroll;
+		overflow-x: hidden;
+		height: 100px;
+		width: 100%;
+	}
 	#nomeMes
 	{
 		width: 150px;
@@ -124,7 +131,7 @@
 	}
 	.celulaDia a
 	{
-			display: block;
+		display: block;
 	}
 	.celulaDia a:hover
 	{
@@ -231,7 +238,7 @@
 	#agenda #botoes
 	{
 		float: left;
-		margin: 40px 10px 5px 5px;
+		margin: 40px 0px 5px 30px;
 	}
 </style>
 
@@ -272,6 +279,7 @@
 <?php foreach($_arrDias as $_idS => $_arrProp) : ?>
 	<?php if ($_arrProp['dia']) : ?>
 	<td	<?php if ($_arrProp['dia']==date('d') && $mes==date('m') && $ano==date('Y')) echo "class='hoje'" ?>>
+	<div>
 		<span class='celulaDia'>
 			<a href='' title='Clique aqui para inserir um novo evento ...' onclick='return setEvento("0<?= $_arrProp['dia'] ?>")'><?= $_arrProp['dia'] ?></a>
 		</span><br />
@@ -283,14 +291,14 @@
 				<div class='agId' id='<?= $id.'id' ?>'><?= $_arrCmps['id'] ?></div>
 				<a title='<?= $_arrCmps["evento"] ?>' class='celulaA' href='' onclick="return setEvento('<?= $id ?>');">
 				<div class='agHora' id='<?= $id.'hora' ?>'><?= $_arrCmps['hora'] ?></div>
-				<?= substr($_arrCmps['evento'],0,15).' ...' ?>
+				<?= substr($_arrCmps['evento'],0,10).' ...' ?>
 				<div class='agEvento' id='<?= $id.'evento' ?>'><?= $_arrCmps['evento'] ?></div>
 				</a>
 			</div>
 			<?php endforeach ?>
 		<?php endif ?>
 
-	</td>
+	</div></td>
 	<?php else : ?>
 	<td class='hojeNao'>-</td>
 	<?php endif ?>

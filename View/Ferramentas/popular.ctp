@@ -36,7 +36,7 @@
 		text-align: right;
 		margin: 0px 5px 0px 0px;
 		line-height: 24px;
-		background-color: #ddd;
+		font-weight: bold;
 	}
 	.divLabel
 	{
@@ -56,14 +56,16 @@
 	<?php echo $this->Form->end('Enviar');  ?>
 	<?php else : ?>
 	<div class='divLabel'><label>Model: </label><?= $arrProp['Model'] ?></div>
-	<div class='divLabel'><label>Total: </label><?= $arrProp['total'] ?></div>
 	<div class='divLabel'><label>Loop: </label><?= $arrProp['loop'] ?></div>
-	<div class='divLabel'><label>Feito: </label><?= $arrProp['feito'] ?></div>
+	<div class='divLabel' style='color: green;'><label>Total: </label><?= number_format($arrProp['total'],0,',','.') ?></div>
+	<div class='divLabel'><label>Feito: </label><b><?= number_format($arrProp['feito'],0,',','.') ?></b></div>
 	<br />
 	<div class='divLabel'><label>Início: </label><?= date('d/m/Y H:i:s',$arrProp['inicio']) ?></div>
 	<?php if (isset($arrProp['fim'])) : ?>
 	<div class='divLabel'><label>Fim: </label><?= date('d/m/Y H:i:s',$arrProp['fim']) ?></div>
-	<div class='divLabel'><label>Tempo Corrido: </label><?= date('i:s',$arrProp['fim']-$arrProp['inicio']) ?></div>
+	<div class='divLabel'><label>Tempo Corrido: </label><?= date('i:s',$arrProp['fim']-$arrProp['inicio']) ?> minutos</div>
+	<?php else : ?>
+	<div class='divLabel' style='color: red;'><center>Aguenta a mão aí, que eu tô populando !!!</center></div>
 	<?php endif ?>
 	
 	<?php endif ?>

@@ -207,7 +207,7 @@ class FerramentasController extends AppController {
 				$texto['3'] = 'tation malorum sea, cu qui esse omittam. Eu prima dicit aperiri est, dicat ignota interpretaris at mel, te';
 				$texto['4'] = 'Vim et veri tamquam commune, his ne novum commodo minimum. Eu rebum viris definiebas mea, no tuo';
 				$d1 = mktime(0,0,0,1,1,1980);
-				$d2 = mktime(0,0,0,1,1,date('Y'));
+				$d2 = mktime(0,0,0,1,1,date('Y')+1);
 
 				$model	= $this->Session->read('Popular.Model');
 				App::uses($model,'Model');
