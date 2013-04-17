@@ -32,7 +32,7 @@
 	{
 		display: block;
 		float: left;
-		width: 150px;
+		width: 190px;
 		text-align: right;
 		margin: 0px 5px 0px 0px;
 		line-height: 24px;
