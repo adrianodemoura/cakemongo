@@ -17,7 +17,7 @@ class Agenda extends AppModel {
 	 * @var		string
 	 * @link	http://book.cakephp.org/2.0/en/models/model-attributes.html#displayfield
 	 */
-	public $displayField 	= 'data_txt';
+	public $displayField 	= 'evento';
 
 	/**
 	 * Nome da collection do banco de dados, ou nulo caso não possua tabela.

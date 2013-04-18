@@ -1,6 +1,7 @@
 .menu
 {
 	background-color: #eee;
+	z-index: 1001;
 }
 
 .menu a
