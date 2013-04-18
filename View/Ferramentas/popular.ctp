@@ -60,6 +60,7 @@
 	<div class='divLabel' style='color: green;'><label>Total: </label><?= number_format($arrProp['total'],0,',','.') ?></div>
 	<div class='divLabel'><label>Feito: </label><b><?= number_format($arrProp['feito'],0,',','.') ?></b></div>
 	<br />
+	<div class='divLabel'><label>Próximo Documento: </label><?= number_format($arrProp['id'],0,',','.') ?></div>
 	<div class='divLabel'><label>Início: </label><?= date('d/m/Y H:i:s',$arrProp['inicio']) ?></div>
 	<?php if (isset($arrProp['fim'])) : ?>
 	<div class='divLabel'><label>Fim: </label><?= date('d/m/Y H:i:s',$arrProp['fim']) ?></div>

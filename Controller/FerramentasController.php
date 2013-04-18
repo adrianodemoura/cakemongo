@@ -175,7 +175,8 @@ class FerramentasController extends AppController {
 	 */
 	public function popular()
 	{
-		$tota = isset($this->data['Popular']['total']) ? $this->data['Popular']['total'] : 0;
+		$arrProp 	= array();
+		$tota		= isset($this->data['Popular']['total']) ? $this->data['Popular']['total'] : 0;
 		if (!empty($tota))
 		{
 			$arrProp 			= array();
@@ -183,10 +184,10 @@ class FerramentasController extends AppController {
 			$arrProp['Model'] 	= isset($this->data['Popular']['model']) ? $this->data['Popular']['model'] : null;
 			$arrProp['loop']  	= isset($this->data['Popular']['loop'])  ? $this->data['Popular']['loop']  : 0;
 			$arrProp['feito']	= 0;
+			$arrProp['id']		= 1;
 			$arrProp['inicio']  = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
 			$this->Session->write('Popular',$arrProp);
 		}
-		$arrProp = $this->Session->check('Popular') ? $this->Session->read('Popular') : array();
 
 		if ($this->Session->check('Popular.total'))
 		{
@@ -194,61 +195,65 @@ class FerramentasController extends AppController {
 			$loop 	= $this->Session->read('Popular.loop');
 			$aFazer = ($total / $loop);
 
-			// se chegou no fim
-			if ($this->Session->read('Popular.feito')>=$total)
-			{
-				$arrProp['fim'] = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
-				$this->Session->delete('Popular');
-			} else
-			{
-				$texto['0'] = 'Lorem ipsum dolor sit amet, ei munere aliquid officiis mel, an fugit imperdiet disputando quo, ut quo';
-				$texto['1'] = 'dictas expetenda dissentiet. Ei simul salutatus eum. Timeam consequuntur sea te, alii eirmod vel ut.';
-				$texto['2'] = 'Nec reque appetere et. Cum et solet exerci, sea invidunt tractatos ut. Usu et amet case consul. Ferri';
-				$texto['3'] = 'tation malorum sea, cu qui esse omittam. Eu prima dicit aperiri est, dicat ignota interpretaris at mel, te';
-				$texto['4'] = 'Vim et veri tamquam commune, his ne novum commodo minimum. Eu rebum viris definiebas mea, no tuo';
-				$d1 = mktime(0,0,0,1,1,1980);
-				$d2 = mktime(0,0,0,1,1,date('Y')+1);
+			$texto['0'] = 'Lorem ipsum dolor sit amet, ei munere aliquid officiis mel, an fugit imperdiet disputando quo, ut quo';
+			$texto['1'] = 'dictas expetenda dissentiet. Ei simul salutatus eum. Timeam consequuntur sea te, alii eirmod vel ut.';
+			$texto['2'] = 'Nec reque appetere et. Cum et solet exerci, sea invidunt tractatos ut. Usu et amet case consul. Ferri';
+			$texto['3'] = 'tation malorum sea, cu qui esse omittam. Eu prima dicit aperiri est, dicat ignota interpretaris at mel, te';
+			$texto['4'] = 'Vim et veri tamquam commune, his ne novum commodo minimum. Eu rebum viris definiebas mea, no tuo';
+			$d1 = mktime(0,0,0,1,1,1980);
+			$d2 = mktime(0,0,0,1,1,date('Y')+1);
 
-				$model	= $this->Session->read('Popular.Model');
-				App::uses($model,'Model');
-				$M 		= new $model();
-				$schema = $M->schema;
-				unset($schema['_id']);
-				$this->Session->write('Popular.feito',(($this->Session->read('Popular.feito')+$aFazer)));
-				$arrProp 	= $this->Session->read('Popular');
-				$data 		= array();
-				for($i=0; $i<=$aFazer; $i++)
+			$model	= $this->Session->read('Popular.Model');
+			App::uses($model,'Model');
+			$M 		= new $model();
+			$schema = $M->schema;
+			unset($schema['_id']);
+			$arrProp 	= $this->Session->read('Popular');
+			$data 		= array();
+			$id			= $this->Session->read('Popular.id');
+			for($i=0; $i<$aFazer; $i++)
+			{
+				foreach($schema as $_cmp => $_arrProp)
 				{
-					foreach($schema as $_cmp => $_arrProp)
+					$tipo = isset($_arrProp['type']) ? $_arrProp['type'] : 'string';
+					if (isset($_arrProp['tipo'])) $tipo = $_arrProp['tipo'];
+					switch($tipo)
 					{
-						$tipo = isset($_arrProp['type']) ? $_arrProp['type'] : 'string';
-						if (isset($_arrProp['tipo'])) $tipo = $_arrProp['tipo'];
-						switch($tipo)
-						{
-							case 'integer':
-								$data[$i][$model][$_cmp] = rand(1,1000);
-								break;
-							case 'data':
-								$data[$i][$model][$_cmp] = date('d/m/Y',rand($d1,$d2));
-								break;
-							case 'datatempo':
-								$data[$i][$model][$_cmp] = date('d/m/Y H:i:s',rand($d1,$d2));
-								break;
-							case 'string':
-							case 'text':
-								$data[$i][$model][$_cmp] = substr($texto[rand(0,4)],0,$_arrProp['length']);
-								break;
-						}
+						case 'integer':
+							$data[$i][$model][$_cmp] = $id;
+							break;
+						case 'data':
+							$data[$i][$model][$_cmp] = date('d/m/Y',rand($d1,$d2));
+							break;
+						case 'datatempo':
+							$data[$i][$model][$_cmp] = date('d/m/Y H:i:s',rand($d1,$d2));
+							break;
+						case 'string':
+						case 'text':
+							$data[$i][$model][$_cmp] = substr($id.' '.trim($texto[rand(0,4)]).' '.$id,0,$_arrProp['length']);
+							$id++;
+							break;
 					}
 				}
-				if (!$M->saveAll($data))
-				{
-					debug($data);
-					die('fudeu !!!');
-				}
+			}
+			$this->Session->write('Popular.id',$id);
+			$this->Session->write('Popular.feito',(($this->Session->read('Popular.feito')+$aFazer)));
+			if (!$M->saveAll($data))
+			{
+				debug($data);
+				die('fudeu !!!');
+			}
+
+			// verifica se chegou no fim
+			if ($this->Session->read('Popular.feito')>=$this->Session->read('Popular.total'))
+			{
+				$this->Session->write('Popular.fim',mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
+				$arrProp = $this->Session->read('Popular');
+				$this->Session->delete('Popular');
 			}
 		}
-		
+
+		$arrProp = $this->Session->check('Popular') ? $this->Session->read('Popular') : $arrProp;
 		$this->set(compact('arrProp'));
 	}
 }
