@@ -540,7 +540,7 @@ class AppController extends Controller {
 
 		$opc 			= array();
 		if (!in_array($tipo,array('integer','float')))
-			$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
+			$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => "$texto","\$options"=>"i");
 		else
 			$opc['conditions'][$modelClass.'.'.$campo] = (float) $texto;
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';
