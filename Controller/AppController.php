@@ -512,7 +512,7 @@ class AppController extends Controller {
 		$opc['order'][$modelClass.'.'.$campo] = 'asc';
 		$opc['fields'] 	= array($modelClass.'.'.$campo,$modelClass.'.'.$campo);
 		if (!in_array($tipo,array('integer','float')))
-			$opc['conditions'][$modelClass.'.'.$campo] = array("\$regex" => ".*$texto.*","\$options"=>"i");
+			$opc['conditions'][$modelClass.'.'.$campo] = new MongoRegex('/'.$texto.'/i');
 		else
 			$opc['conditions'][$modelClass.'.'.$campo] = (float) $texto;
 		$opc['limit'] 	= 10000;
