@@ -27,4 +27,14 @@ Total de documentos: 1000000
 Loop: 100
 * neste exemplo serão incluídos (1000.000/100=10.000) dez mil documentos por vez.
 
+3 - Considerações
+Plugin mongoDB de ichikaway(Yasushi Ichikawa) http://github.com/ichikaway/
+Sem ele o cake não conversa com o mongoDB, mas o plugin foi alterado pra funciona-se perfeitamente.
+
+Plugin SecurePHP
+Para aumentar a segurança
+
+4 - Agradecimentos
+Aos colegas e amigos que ajudam na homologação.
+
 Execute o login e divirta-se.
