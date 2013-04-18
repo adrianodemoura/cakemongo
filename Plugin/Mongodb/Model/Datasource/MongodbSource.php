@@ -220,16 +220,11 @@ class MongodbSource extends DboSource {
 			'perfil':'ADMINISTRADOR','criado':".strtotime(date('Y/m/d H:i:s'))."})
 
 			db.acessos.createIndex({login:1})
-			db.cidades.createIndex({nome:1})
-			db.cidades.createIndex({uf:1})
-			db.agendas.createIndex({evento:1})
-			db.agendas.createIndex({data_txt:1})
-			db.usuarios.createIndex({login:1})
-			db.usuarios.createIndex({modificado:1})
-			db.usuarios.createIndex({nome:1})
+			db.cidades.createIndex({nome:1,uf:1})
+			db.agendas.ensureIndex({evento:1,data_txt:1,criado:1})
+			db.usuarios.createIndex({login:1,modificado:1,nome:1})
 			db.perfis.createIndex({nome:1})
-			db.avisos.createIndex({texto:1})
-			db.avisos.createIndex({modificado:1})
+			db.avisos.createIndex({texto:1,modificado:1})
 			
 			A senha do usu&aacute;rio <b>admin</b> &eacute; <b>admin67</b>
 			
