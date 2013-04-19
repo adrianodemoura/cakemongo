@@ -37,4 +37,28 @@ class UrlsController extends AppController {
 		$url = substr($url,0,strlen($url)-1);
 		$this->viewVars['schema']['link']['input']['label'] = 'Url <span style="font-size: 9px;">'.$url.'</span>';
 	}
+
+	/**
+	 * Exibe a tela de audição do documento de permissão
+	 * 
+	 * @param	integer	$id		Id do documento a ser editado
+	 * @return	void
+	 */
+	public function editar($id=0)
+	{
+		if ($id=='!')
+		{
+			$id=0;
+			$urlA = str_replace(Router::url('/',true),'',$this->referer());
+			if (strpos($urlA,'pag:'))
+			{
+				$urlA = substr($urlA,0,strpos($urlA,'pag:'));
+			}
+		} 
+		parent::editar($id);
+		if (isset($urlA) && $id==0)
+		{
+			$this->request->data['Url']['link'] = '/'.$urlA;
+		}
+	}
 }

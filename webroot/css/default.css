@@ -302,3 +302,10 @@ body
 	-moz-opacity: 0.65;
 	filter: alpha(opacity=65);
 }
+
+#ferAdmin
+{
+	position: absolute;
+	/*right: 10px;*/
+	margin: 5px 0px 0px 500px;
+}
