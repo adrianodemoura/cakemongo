@@ -80,7 +80,7 @@ $(document).ready(function()
 			
 		</div>
 
-		<?php if ($this->Session->read('Usuario.perfil')=='ADMINISTRADOR' && $this->name != 'Urls') : ?>
+		<?php if ($this->Session->read('Usuario.perfil')=='ADMINISTRADOR' && !in_array($this->name,array('Urls','Usuarios')) && $this->action!='principal') : ?>
 		<div id='ferAdmin'>
 			<a href='<?= $this->base ?>/urls/editar/!' title='Clique aqui para definir a permissão de acesso ...'>
 			<img src='<?= Router::url('/',true) ?>/img/bt_cadeado.png' border='0xp' /></a>

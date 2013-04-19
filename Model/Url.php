@@ -82,7 +82,7 @@ class Url extends AppModel {
 			2 	=> array
 			(
 				'rule' 		=> 'isUnique',
-				'message' 	=> 'Esta link já foi cadastrada!'
+				'message' 	=> 'Este link já foi cadastrado!'
 			),
 		)
 	);
