@@ -228,6 +228,7 @@ class UsuariosController extends AppController {
 		$opc 			= array();
 		$opc['fields']	= array('Perfil.nome','Perfil.nome');
 		$opc['order']['Perfil.nome'] = 'asc';
+		$opc['conditions']['nome']['$ne'] = 'ADMINISTRADOR';
 		$Perfil = new Perfil();
 		$this->viewVars['perfis'] = $Perfil->find('list',$opc,'listPerfil');
 	}
