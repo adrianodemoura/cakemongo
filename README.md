@@ -28,6 +28,7 @@ Loop: 100
 * neste exemplo serão incluídos (1000.000/100=10.000) dez mil documentos por vez.
 
 3 - Instalação do MongoDB
+
 root@vbDebian64:/#
 root@vbDebian64:/# cd /tmp
 root@vbDebian64:/tmp# wget -c http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.4.4.tgz
