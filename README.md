@@ -27,7 +27,7 @@ Total de documentos: 1000000
 Loop: 100
 * neste exemplo serão incluídos (1000.000/100=10.000) dez mil documentos por vez.
 
-3 - Instalação do MongoDB
+3 - Instalação do MongoDB (64 bits)
 
 root@vbDebian64:/#
 
