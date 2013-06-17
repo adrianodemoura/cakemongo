@@ -30,17 +30,29 @@ Loop: 100
 3 - Instalação do MongoDB
 
 root@vbDebian64:/#
+
 root@vbDebian64:/# cd /tmp
+
 root@vbDebian64:/tmp# wget -c http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.4.4.tgz
+
 root@vbDebian64:/tmp# cd /opt
+
 root@vbDebian64:/opt# tar -zvxf /tmp/mongodb-linux-x86_64-2.4.4.tgz 
+
 root@vbDebian64:/opt# chmod +x -R /opt/mongodb/bin/
+
 root@vbDebian64:/opt# mv mongodb-linux-x86_64-2.4.4/ mongodb/
+
 root@vbDebian64:/opt# mkdir -p mongodb/data
+
 root@vbDebian64:/opt# /opt/mongodb/bin/mongod --dbpath=/opt/mongodb/data
+
 root@vbDebian64:/opt# /opt/mongodb/bin/mongo
+
 > show dbs;
+
 > exit;
+
 
 4 - Considerações
 Plugin mongoDB de ichikaway(Yasushi Ichikawa) http://github.com/ichikaway/
